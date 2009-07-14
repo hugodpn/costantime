@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  company_id: 1
+  rate_type_id: 1
+  rate: 1.5
+  duration: 1
+
+two:
+  name: MyString
+  company_id: 1
+  rate_type_id: 1
+  rate: 1.5
+  duration: 1

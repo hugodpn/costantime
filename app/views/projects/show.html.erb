@@ -1,0 +1,28 @@
+<p>
+  <b>Name:</b>
+  <%=h @project.name %>
+</p>
+
+<p>
+  <b>Company:</b>
+  <%=h @project.company_id %>
+</p>
+
+<p>
+  <b>Rate type:</b>
+  <%=h @project.rate_type_id %>
+</p>
+
+<p>
+  <b>Rate:</b>
+  <%=h @project.rate %>
+</p>
+
+<p>
+  <b>Duration:</b>
+  <%=h @project.duration %>
+</p>
+
+
+<%= link_to 'Edit', edit_project_path(@project) %> |
+<%= link_to 'Back', projects_path %>
