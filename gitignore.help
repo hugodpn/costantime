@@ -1,8 +1,8 @@
 nbproject
 .gitignore
-/db/huge_blog_development.sqlite3
-/db/huge_blog_test.sqlite3
-/db/huge_blog_production.sqlite3
+db/costantime_development.sqlite3
+db/costantime_test.sqlite3
+db/costantime_production.sqlite3
 /db/schema.rb
 /log/*
 /tmp/*
