@@ -1,9 +1,10 @@
 class CreatePersonProjects < ActiveRecord::Migration
   def self.up
-    create_table :person_projects, :id => false do |t|
+    create_table :person_projects do |t|
       t.integer :person_id
       t.integer :project_id
       t.integer :percentage
+      t.datetime :date_worked
 
       t.timestamps
     end

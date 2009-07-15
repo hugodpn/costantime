@@ -1,0 +1,19 @@
+<h1>Person - Project</h1>
+
+<table>
+  <tr>
+    <th>Person</th>
+    <th>Project</th>
+    <th>%</th>
+    <th>Date Worked</th>
+  </tr>
+  <% @person_project.each do |pr| %>
+    <tr>
+      <td><%= pr.person.first_name + " " + pr.person.last_name %></td>
+      <td><%= pr.project.name %></td>
+      <td><%= pr.percentage %></td>
+      <td><%= pr.date_worked %></td>
+      <td><%= link_to 'Destroy', pr, :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>

@@ -4,26 +4,33 @@ one:
   id: 1
   first_name: Alejandro
   last_name: Eliseche
-  salary: 3000
+  salary: 2000
   working_hours: 8
 
 two:
   id: 2
   first_name: Leonardo
   last_name: Mateo
-  salary: 3000
+  salary: 2000
   working_hours: 8
 
 three:
   id: 3
   first_name: Luis
   last_name: Floreani
-  salary: 3000
+  salary: 2000
   working_hours: 8
 
 four:
   id: 4
   first_name: Leandro
   last_name: Gracian
-  salary: 3000
+  salary: 2000
   working_hours: 8
+
+five:
+  id: 5
+  first_name: Silvia
+  last_name: Fine
+  salary: 1300
+  working_hours: 6
