@@ -1,4 +1,4 @@
 class Person < ActiveRecord::Base
-  has_many :per_projs
-  has_many :projects, :through => :per_projs
+  has_many :person_projects
+  has_many :projects, :through => :person_projects
 end
