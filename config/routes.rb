@@ -21,6 +21,7 @@ ActionController::Routing::Routes.draw do |map|
 
   # Sample of regular route:
   #   map.connect 'products/:id', :controller => 'catalog', :action => 'view'
+     map.connect '/person_projects/destroy/:id/:person_id', :controller => 'person_projects', :action => 'destroy'
   # Keep in mind you can assign values other than :controller and :action
 
   # Sample of named route:
