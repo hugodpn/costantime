@@ -4,4 +4,7 @@ class Project < ActiveRecord::Base
 
   belongs_to :company
   belongs_to :rate_type
+
+  validates_presence_of :name
+
 end

@@ -2,16 +2,16 @@
 
 project_one:
   id: 1
-  name: One Pro..
+  name: gxy
   company_id: 1
-  rate_type_id: 1
+  rate_type_id: 4
   rate: 1.5
   duration: 1
 
 project_two:
   id: 2
-  name: Project Two
-  company_id: 1
+  name: pwp
+  company_id: 2
   rate_type_id: 1
   rate: 1.5
-  duration: 1
+  duration: 6

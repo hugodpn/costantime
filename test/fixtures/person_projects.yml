@@ -1,19 +1,16 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  id: 1
   person_id: 1
   project_id: 1
   percentage: 34
 
 two:
-  id: 2
   person_id: 2
   project_id: 1
   percentage: 50
 
 three:
-  id: 3
   person_id: 1
   project_id: 2
   percentage: 70

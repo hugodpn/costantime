@@ -7,3 +7,19 @@ mensual:
 anual:
   id: 2
   name: Anual
+
+total:
+  id: 3
+  name: Total
+
+hs:
+  id: 4
+  name: Hs
+
+costo:
+  id: 5
+  name: Costo
+
+financiado:
+  id: 6
+  name: Financiado

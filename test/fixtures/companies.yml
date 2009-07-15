@@ -1,9 +1,13 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-impsa:
+sni:
   id: 1
-  name: IMPSA
+  name: ssi
+
+gis_working:
+  id: 2
+  name: GIS Working
 
 repsol:
-  id: 2
-  name: Repsol
+  id: 3
+  name: Microsoft

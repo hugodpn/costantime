@@ -25,6 +25,8 @@ class ProjectsController < ApplicationController
   # GET /projects/new.xml
   def new
     @project = Project.new
+    @companies = Company.all
+    @rate_types = RateType.all
 
     respond_to do |format|
       format.html # new.html.erb
@@ -35,12 +37,16 @@ class ProjectsController < ApplicationController
   # GET /projects/1/edit
   def edit
     @project = Project.find(params[:id])
+    @companies = Company.all
+    @rate_types = RateType.all
   end
 
   # POST /projects
   # POST /projects.xml
   def create
     @project = Project.new(params[:project])
+    @companies = Company.all
+    @rate_types = RateType.all
 
     respond_to do |format|
       if @project.save
@@ -58,6 +64,8 @@ class ProjectsController < ApplicationController
   # PUT /projects/1.xml
   def update
     @project = Project.find(params[:id])
+    @companies = Company.all
+    @rate_types = RateType.all
 
     respond_to do |format|
       if @project.update_attributes(params[:project])
