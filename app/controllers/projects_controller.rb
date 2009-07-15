@@ -1,4 +1,8 @@
 class ProjectsController < ApplicationController
+  include AuthenticatedSystem
+  before_filter :login_required
+
+
   # GET /projects
   # GET /projects.xml
   def index
