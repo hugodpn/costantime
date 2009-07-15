@@ -4,7 +4,7 @@ class CreatePersonProjects < ActiveRecord::Migration
       t.integer :person_id
       t.integer :project_id
       t.integer :percentage
-      t.datetime :date_worked
+      t.date :date_worked
 
       t.timestamps
     end

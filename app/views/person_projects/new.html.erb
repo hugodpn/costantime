@@ -1,0 +1,23 @@
+<h1>Add Projects</h1>
+
+
+<% form_for @person_project do |f| %>
+  <%= f.error_messages %>
+
+  <p>Person: <%= @person.first_name + " " + @person.last_name %></p>
+
+  <%= f.hidden_field(:person_id, :value => @person.id) %>
+
+
+  <p>Projects: <%= f.select :project_id, @projects.collect {|p| [ p.name, p.id ] }, { :include_blank => false }  %></p>
+
+  <p>Date: <%= f.date_select :date_worked %></p>
+
+  <p>Percentage: <%= f.text_field :percentage, :size => 10  %></p>
+
+  <p>
+    <%= f.submit 'Create' %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', person_projects_path %>
