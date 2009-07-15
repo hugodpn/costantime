@@ -1,13 +1,15 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  first_name: MyString
-  last_name: MyString
+  id: 1
+  first_name: Juan
+  last_name: Perez
   salary: 1.5
   working_hours: 1
 
 two:
-  first_name: MyString
-  last_name: MyString
+  id: 2
+  first_name: Paulo
+  last_name: Cohelo
   salary: 1.5
   working_hours: 1
