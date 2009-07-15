@@ -1,7 +1,10 @@
 class ProjectsController < ApplicationController
-  include AuthenticatedSystem
-  before_filter :login_required
+  before_filter :load_selects, :only => [:new, :edit, :create, :update ]
 
+  def load_selects
+    @companies = Company.all
+    @rate_types = RateType.all
+  end
 
   # GET /projects
   # GET /projects.xml
@@ -41,16 +44,12 @@ class ProjectsController < ApplicationController
   # GET /projects/1/edit
   def edit
     @project = Project.find(params[:id])
-    @companies = Company.all
-    @rate_types = RateType.all
   end
 
   # POST /projects
   # POST /projects.xml
   def create
     @project = Project.new(params[:project])
-    @companies = Company.all
-    @rate_types = RateType.all
 
     respond_to do |format|
       if @project.save
@@ -68,8 +67,6 @@ class ProjectsController < ApplicationController
   # PUT /projects/1.xml
   def update
     @project = Project.find(params[:id])
-    @companies = Company.all
-    @rate_types = RateType.all
 
     respond_to do |format|
       if @project.update_attributes(params[:project])

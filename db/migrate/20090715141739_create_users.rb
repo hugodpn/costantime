@@ -10,8 +10,10 @@ class CreateUsers < ActiveRecord::Migration
       t.column :remember_token,            :string
       t.column :remember_token_expires_at, :datetime
       
-      
     end
+
+    User.create(:id => 1, :login => "admin", :email => "admin@admin.com", :password => "adminadmin", :password_confirmation => "adminadmin")
+
   end
 
   def self.down
