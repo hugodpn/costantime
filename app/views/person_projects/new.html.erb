@@ -33,7 +33,7 @@
       <td><%= pr.person.first_name + " " + pr.person.last_name %></td>
       <td><%= pr.project.name %></td>
       <td><%= pr.percentage %></td>
-      <td><%= pr.date_worked %></td>
+      <td><%= pr.date_worked.strftime("%B, %Y") %></td>
       <td><%= link_to 'Destroy', "/person_projects/destroy/#{pr.id}/#{@person.id}", :confirm => 'Are you sure?', :method => :delete %></td>
     </tr>
   <% end %>

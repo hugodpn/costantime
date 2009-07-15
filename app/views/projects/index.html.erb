@@ -12,8 +12,8 @@
 <% @projects.each do |project| %>
   <tr>
     <td><%=h project.name %></td>
-    <td><%=h project.company_id %></td>
-    <td><%=h project.rate_type_id %></td>
+    <td><%=h project.company.name %></td>
+    <td><%=h project.rate_type.name %></td>
     <td><%=h project.rate %></td>
     <td><%=h project.duration %></td>
     <td><%= link_to 'Show', project %></td>

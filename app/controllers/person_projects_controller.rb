@@ -27,6 +27,7 @@ class PersonProjectsController < ApplicationController
   end
 
   def create
+    puts params.inspect
     @person_project = PersonProject.new(params[:person_project])
     @person = Person.find(params[:person_project][:person_id])
     @projects = Project.all

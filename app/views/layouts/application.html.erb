@@ -8,16 +8,15 @@
   <%= stylesheet_link_tag 'scaffold', 'costantime' %>
 </head>
 <body>
-
+  <h1>Cost and Time</h1>
 <p style="color: green"><%= flash[:notice] %></p>
 
 <% if current_user %>
 <ul>
+  <li><%= link_to "People", people_path %></li>
   <li><%= link_to "Projects", projects_path %></li>
   <li><%= link_to "Companies", companies_path %></li>
-  <li><%= link_to "People", people_path %></li>
   <li><%= link_to "Rate Types", rate_types_path %></li>
-  <li><%= link_to "Person - Project", "/person_projects" %></li>
   <li><%= link_to "Users", users_path %></li>
   <li><%= link_to "Logout", "/logout" %></li>
 </ul>
