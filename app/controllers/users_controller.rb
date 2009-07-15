@@ -31,7 +31,26 @@ class UsersController < ApplicationController
       format.html # index.html.erb
       format.xml  { render :xml => @users }
     end
-  end 
+  end
+
+   def edit
+    @user = User.find(params[:id])
+   end
+
+  def update
+    @user = User.find(params[:id])
+
+    respond_to do |format|
+      if @user.update_attributes(params[:user])
+        flash[:notice] = 'User was successfully updated.'
+        format.html { redirect_to(users_path) }
+        format.xml { head :ok }
+      else
+        format.html { render :action => "edit" }
+        format.xml { render :xml => @user.errors, :status => :unprocessable_entity }
+      end
+    end
+  end
   
   def destroy
     @user = User.find(params[:id])
