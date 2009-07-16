@@ -1,0 +1,24 @@
+<h1>Editing historic_project</h1>
+
+<% form_for(@historic_project) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :project_id %><br />
+    <%= f.select :project_id,  @projects.collect {|p| [ p.name, p.id ] }, { :include_blank => false } %>
+  </p>
+  <p>
+    <%= f.label :profit %><br />
+    <%= f.text_field :profit %>
+  </p>
+  <p>
+    <%= f.label :historic_date %><br />
+    <%= f.date_select( :historic_date, :start_year => 2009, :discard_day => true, :include_blank => false) %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @historic_project %> |
+<%= link_to 'Back', historic_projects_path %>

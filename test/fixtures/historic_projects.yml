@@ -1,0 +1,9 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  profit: 1.5
+  historic_date: 2009-07-16
+
+two:
+  profit: 1.5
+  historic_date: 2009-07-16

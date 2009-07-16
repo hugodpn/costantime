@@ -1,0 +1,38 @@
+<h1>New historic_project</h1>
+
+<% form_for(@historic_project) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :project_id %><br />
+    <%= f.select :project_id,  @projects.collect {|p| [ p.name, p.id ] }, { :include_blank => false } %>
+  </p>
+  <p>
+    <%= f.label :profit %><br />
+    <%= f.text_field :profit %>
+  </p>
+  <p>
+    <%= f.label :historic_date %><br />
+    <%= f.date_select( :historic_date, :start_year => 2009, :discard_day => true, :include_blank => false) %>
+  </p>
+  <p>
+    <%= f.submit 'Create' %>
+  </p>
+<% end %>
+
+<table>
+  <tr>
+    <th>Project</th>
+    <th>Profit</th>
+    <th>Date</th>
+  </tr>
+  <% HistoricProject.find(:all).each do |hp|  %>
+  <tr>
+    <td><%= hp.project.name %></td>
+    <td><%= hp.profit %></td>
+    <td><%= hp.historic_date.strftime("%B, %Y") %></td>
+  </tr>
+  <% end %>
+</table>
+
+<%= link_to 'Back', historic_projects_path %>
