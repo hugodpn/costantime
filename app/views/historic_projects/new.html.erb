@@ -31,8 +31,10 @@
     <td><%= hp.project.name %></td>
     <td><%= hp.profit %></td>
     <td><%= hp.historic_date.strftime("%B, %Y") %></td>
+    <td><%= link_to '[e]', "/historic_projects/edit/#{hp.id}" %></td>
+    <td><%= link_to '[-]', "/historic_projects/destroy/#{hp.id}", :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
   <% end %>
 </table>
 
-<%= link_to 'Back', historic_projects_path %>
+<%= link_to 'Back', '/' %>

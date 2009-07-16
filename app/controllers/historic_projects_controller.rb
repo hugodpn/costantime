@@ -57,7 +57,7 @@ class HistoricProjectsController < ApplicationController
     respond_to do |format|
       if @historic_project.update_attributes(params[:historic_project])
         flash[:notice] = 'HistoricProject was successfully updated.'
-        format.html { redirect_to(historic_projects_path) }
+        format.html { redirect_to(new_historic_project_path) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -73,7 +73,7 @@ class HistoricProjectsController < ApplicationController
     @historic_project.destroy
 
     respond_to do |format|
-      format.html { redirect_to(historic_projects_url) }
+      format.html { redirect_to(new_historic_project_path) }
       format.xml  { head :ok }
     end
   end

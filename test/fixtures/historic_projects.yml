@@ -1,9 +1,26 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  profit: 1.5
-  historic_date: 2009-07-16
+  id: 1
+  project_id: 1
+  profit: 10000
+  historic_date: 2009-01-01
 
 two:
-  profit: 1.5
-  historic_date: 2009-07-16
+  id: 2
+  project_id: 2
+  profit: 10000
+  historic_date: 2009-01-01
+
+three:
+  id: 3
+  project_id: 1
+  profit: 20000
+  historic_date: 2009-03-01
+
+four:
+  id: 4
+  project_id: 2
+  profit: 20000
+  historic_date: 2009-03-01
+
