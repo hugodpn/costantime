@@ -2,11 +2,11 @@
 
 mensual:
   id: 1
-  name: Mensual
+  name: Monthly
 
 anual:
   id: 2
-  name: Anual
+  name: Annual
 
 total:
   id: 3
@@ -14,12 +14,12 @@ total:
 
 hs:
   id: 4
-  name: Hs
+  name: Hours
 
 costo:
   id: 5
-  name: Costo
+  name: Cost
 
 financiado:
   id: 6
-  name: Financiado
+  name: Funded

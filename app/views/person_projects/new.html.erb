@@ -1,20 +1,29 @@
-<h1>Add Projects</h1>
+<h1>Person - Project</h1>
 
+<h2><%= @requested_date.strftime("%B, %Y") %></h2>
 
-<% form_for @person_project do |f| %>
+<% form_for(@person_project) do |f| %>
   <%= f.error_messages %>
-
-  <p>Person: <%= @person.first_name + " " + @person.last_name %></p>
-
-  <%= f.hidden_field(:person_id, :value => @person.id) %>
-
-
-  <p>Projects: <%= f.select :project_id, @projects.collect {|p| [ p.name, p.id ] }, { :include_blank => false }  %></p>
-
-  <p>Date: <%= f.date_select :date_worked %></p>
-
-  <p>Percentage: <%= f.text_field :percentage, :size => 10  %></p>
-
+  <p>
+    <%= f.label :date_worked %><br />
+    <%= f.date_select( :date_worked, :start_year => 2005, :end_year => 2015, :discard_day => true, :include_blank => false) %>
+    <%#= "$('person_project_date_worked_1i').value" %>
+    <%#= link_to "Change", "/person_projects/new/-02-1" %>
+    <a href="#" onClick="parent.location='/person_projects/new/' + $('person_project_date_worked_1i').value + '-' + $('person_project_date_worked_2i').value + '-1' ">Change</a>
+  </p>
+  <p>
+    <%= f.label :person_id %><br />
+    <%= f.select :person_id,  @people.collect {|p| [ p.first_name + " " + p.last_name, p.id ] }, { :include_blank => false } %>
+  </p>
+  <p>
+    <%= f.label :project_id %><br />
+    <%= f.select :project_id,  @projects.collect {|p| [ p.name, p.id ] }, { :include_blank => false } %>
+  </p>
+  <p>
+  <p>
+    <%= f.label :percentage %><br />
+    <%= f.text_field :percentage, :size => 5 %>%
+  </p>
   <p>
     <%= f.submit 'Create' %>
   </p>
@@ -24,20 +33,20 @@
 <table>
   <tr>
     <th>Person</th>
-    <th>Project</th>
-    <th>%</th>
-    <th>Date Worked</th>
+    <th>Total</th>
   </tr>
-  <% @person.person_projects.each do |pr| %>
+  <% @people.each do |p| %>
     <tr>
-      <td><%= pr.person.first_name + " " + pr.person.last_name %></td>
-      <td><%= pr.project.name %></td>
-      <td><%= pr.percentage %></td>
-      <td><%= pr.date_worked.strftime("%B, %Y") %></td>
-      <td><%= link_to 'Destroy', "/person_projects/destroy/#{pr.id}/#{@person.id}", :confirm => 'Are you sure?', :method => :delete %></td>
+      <td><%= p.first_name + " " + p.last_name %></td>
+      <td><%= PersonProject.sum("percentage", :conditions => ["person_id = ? and date_worked > ? and date_worked < ?", p.id, @from, @to]) %> %</td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <% PersonProject.find(:all, :conditions => ["person_id = ? and date_worked > ? and date_worked < ?", p.id, @from, @to]).each do |pr|  %>
+          <%= link_to '[-]', "/person_projects/destroy/#{pr.id}/#{@requested_date}", :confirm => 'Are you sure?', :method => :delete %>
+          <%= pr.date_worked.strftime("%B, %Y") + " - " + pr.percentage.to_s + "% - " +  pr.project.name %><br />
+        <% end %><br />
+      </td>
     </tr>
   <% end %>
 </table>
-
-
-<%= link_to 'Back', person_projects_path %>

@@ -14,7 +14,6 @@
     <td><%=h person.last_name %></td>
     <td><%=h person.salary %></td>
     <td><%=h person.working_hours %></td>
-    <td><%= link_to 'Add Project', "/person_projects/new/#{person.id}" %></td>
     <td><%= link_to 'Show', person %></td>
     <td><%= link_to 'Edit', edit_person_path(person) %></td>
     <td><%= link_to 'Destroy', person, :confirm => 'Are you sure?', :method => :delete %></td>
@@ -25,3 +24,4 @@
 <br />
 
 <%= link_to 'New person', new_person_path %>
+<%= link_to 'Person - Project', "person_projects/new/#{Date.today}" %>
