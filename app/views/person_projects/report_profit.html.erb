@@ -16,6 +16,7 @@
     <th>Project</th>
     <th>Income</th>
     <th>Person - Project</th>
+    <th>Profit</th>
   </tr>
   <% @historic_projects.each do |hp|  %>
     <tr>
@@ -23,9 +24,11 @@
       <td><%= hp.income  %></td>
       <td>
         <% hp.project.person_filter(@from, @to).each do |pp|  %>
-          <%# debugger %>
-          * <%= pp.person.first_name + " " + pp.person.last_name + " - " + pp.percentage.to_s + "% " %><br />
+          + <%=  pp.person.first_name + " " + pp.person.last_name + " - " + pp.percentage.to_s + "%  - " + pp.person.cost_by_percentage(pp.percentage).to_s %><br />
         <% end %>
+      </td>
+      <td>
+        <%= hp.project.person_salary(hp.income, @from, @to) %>
       </td>
     </tr>
   <% end %>
