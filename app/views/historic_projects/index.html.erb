@@ -3,14 +3,14 @@
 <table>
   <tr>
     <th>Project</th>
-    <th>Profit</th>
+    <th>Income</th>
     <th>Historic date</th>
   </tr>
 
 <% @historic_projects.each do |historic_project| %>
   <tr>
     <td><%=h historic_project.project.name %></td>
-    <td><%=h historic_project.profit %></td>
+    <td><%=h historic_project.income %></td>
     <td><%=h historic_project.historic_date.strftime("%B, %Y") %></td>
     <td><%= link_to 'Edit', edit_historic_project_path(historic_project) %></td>
     <td><%= link_to 'Destroy', historic_project, :confirm => 'Are you sure?', :method => :delete %></td>

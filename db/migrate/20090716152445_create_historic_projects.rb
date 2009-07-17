@@ -2,7 +2,7 @@ class CreateHistoricProjects < ActiveRecord::Migration
   def self.up
     create_table :historic_projects do |t|
       t.integer :project_id
-      t.float :profit
+      t.float :income
       t.date :historic_date
 
       t.timestamps
