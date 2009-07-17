@@ -29,6 +29,7 @@ class PersonProjectsController < ApplicationController
     @from = @requested_date - 1
     @to =  @requested_date >> 1
 
+
     @people = Person.all
     @projects = Project.all
   end
@@ -62,7 +63,15 @@ class PersonProjectsController < ApplicationController
 
 
   def report_profit
+
+    @requested_date = Date.civil(params[:requested_date][0..3].to_i, params[:requested_date][5..6].to_i, 1)
+
+    @from = @requested_date - 1
+    @to =  @requested_date >> 1
+
+    @historic_projects = HistoricProject.find(:all, :conditions => ["historic_date > ? and historic_date < ?", @from, @to])
     
+
   end
 
 end
