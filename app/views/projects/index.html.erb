@@ -13,9 +13,6 @@
   <tr>
     <td><%=h project.name %></td>
     <td><%=h project.company.name %></td>
-    <td><%=h project.rate_type.name %></td>
-    <td><%=h project.rate %></td>
-    <td><%=h project.duration %></td>
     <td><%= link_to 'Show', project %></td>
     <td><%= link_to 'Edit', edit_project_path(project) %></td>
     <td><%= link_to 'Destroy', project, :confirm => 'Are you sure?', :method => :delete %></td>
@@ -26,4 +23,3 @@
 <br />
 
 <%= link_to 'New project', new_project_path %>
-<%= link_to 'Add project profit', new_historic_project_path %>

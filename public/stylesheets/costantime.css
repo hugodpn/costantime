@@ -1,3 +1,41 @@
 table, td {
     border: 1px solid;
 }
+
+#menuh {
+	font: 100% "Trebuchet MS", Arial, Helvetica, sans-serif;
+	margin-top: 20px;
+}
+
+#menuh ul, li {
+	list-style-type: none;
+}
+
+#menuh ul {
+	margin: 0;
+	padding: 0;
+}
+
+#menuh li {
+	float: left;
+}
+
+#menuh a {
+	text-decoration: none;
+	color: #3366CC;
+	/* background: #F0F7FC; */
+	display: block;
+	padding: 3px 10px;
+	text-align: center;
+	/* border: 1px solid #ACCFE8; */
+	border-width: 1px 1px 1px 0;
+}
+
+
+#menuh a#primero {
+	border-left: 1px solid #ACCFE8;
+}
+
+#menuh a:hover {
+	background: #DBEBF6;
+}

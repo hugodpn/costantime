@@ -61,4 +61,8 @@ class PersonProjectsController < ApplicationController
   end
 
 
+  def report_profit
+    
+  end
+
 end

@@ -3,18 +3,6 @@
   <%= f.text_field :name %>
 </p>
 <p>
-  <%= f.label :rate %><br />
-  <%= f.text_field :rate %>
-</p>
-<p>
-  <%= f.label :duration %><br />
-  <%= f.text_field :duration %>
-</p>
-<p>
   <%= f.label :company_id %><br />
   <%= f.select :company_id,  @companies.collect {|c| [ c.name, c.id ] }, { :include_blank => false } %>
-</p>
-<p>
-  <%= f.label :rate_type_id %><br />
-  <%= f.select :rate_type_id,  @rate_types.collect {|rt| [ rt.name, rt.id ] }, { :include_blank => false } %>
 </p>
