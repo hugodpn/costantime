@@ -1,6 +1,6 @@
 body
 {
-    background-color: #E0DCD1;
+    background-color: #F5F5F5;
     background-image: url(/images/img_top.jpg);
     background-repeat: repeat-x;
     font-family: Arial;
@@ -12,15 +12,16 @@ body
 }
 
 div#wideCentralPanel
-{
+{    
     position: relative;
+    top: 100px;
     width: 100%;
 }
 
 div#contentPage
 {
     position: absolute;
-    top: 100px;
+    top: 130px;
     left: 260px;
     right: 20px;
 }
@@ -45,7 +46,7 @@ img
 #menu
 {
     position: relative;
-    top: 40px;
+    top: 30px;
     width: 100%;
 }
 
@@ -71,7 +72,7 @@ img
     padding: 20px;
     font-family: Helvetica;
     font-size: 15px;
-    color: #000000;
+    color: #FFFFFF;
     text-decoration: none;
 }
 
@@ -89,8 +90,8 @@ img
     top: 84px;
     left: 0px;
     width: 245px;
-    color: #FFFFFF;
-    background-color: #5A9EB5;
+    height: 100%;    
+    background-color: #84a7cb;
 }
 
 #sidebar h1
@@ -118,7 +119,7 @@ img
 
 #sidebar a 
 {
-    color: #FFFFFF;
+    color: #000000;
     text-decoration: none;
 }
 
@@ -147,15 +148,15 @@ img
 {
     position: absolute;
     right: 2px;
-    top: 2px;
-    padding: 3px;
+    top: 30px;
+    padding: 8px;
     border: solid 1px;
     background-color: LightGrey;
 }
 
 #userData strong 
 {
-    margin-right: 30px;
+    margin-right: 60px;
 }
 
 #userData small 

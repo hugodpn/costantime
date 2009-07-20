@@ -1,40 +1,46 @@
-<h1>New historic_project</h1>
+<div id="sidebar">
+  <ul>
+    <li>
+      <h1>New historic_project</h1>
 
-<% form_for(@historic_project) do |f| %>
-  <%= f.error_messages %>
+      <% form_for(@historic_project) do |f| %>
+        <%= f.error_messages %>
 
-  <p>
-    <%= f.label :project_id %><br />
-    <%= f.select :project_id,  @projects.collect {|p| [ p.name, p.id ] }, { :include_blank => false } %>
-  </p>
-  <p>
-    <%= f.label :income %><br />
-    <%= f.text_field :income %>
-  </p>
-  <p>
-    <%= f.label :historic_date %><br />
-    <%= f.date_select( :historic_date, :start_year => 2009, :discard_day => true, :include_blank => false) %>
-  </p>
-  <p>
-    <%= f.submit 'Create' %>
-  </p>
-<% end %>
+        <p>
+          <%= f.label :project_id %><br />
+          <%= f.select :project_id,  @projects.collect {|p| [ p.name, p.id ] }, { :include_blank => false } %>
+        </p>
+        <p>
+          <%= f.label :income %><br />
+          <%= f.text_field :income, :size => 22 %>
+        </p>
+        <p>
+          <%= f.label :historic_date %><br />
+          <%= f.date_select( :historic_date, :start_year => 2009, :discard_day => true, :include_blank => false) %>
+        </p>
+        <p>
+          <%= f.submit 'Create' %>
+        </p>
+      <% end %>
+    </li>
+  </ul>
+</div>
 
-<table>
-  <tr>
-    <th>Project</th>
-    <th>Income</th>
-    <th>Date</th>
-  </tr>
-  <% HistoricProject.find(:all).each do |hp|  %>
-  <tr>
-    <td><%= hp.project.name %></td>
-    <td><%= hp.income %></td>
-    <td><%= hp.historic_date.strftime("%B, %Y") %></td>
-    <td><%= link_to '[e]', "/historic_projects/edit/#{hp.id}" %></td>
-    <td><%= link_to '[-]', "/historic_projects/destroy/#{hp.id}", :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-  <% end %>
-</table>
-
-<%= link_to 'Back', '/' %>
+<div id="contentPage">  
+  <table>
+    <tr>
+      <th>Project</th>
+      <th>Income</th>
+      <th>Date</th>
+    </tr>
+    <% HistoricProject.find(:all).each do |hp|  %>
+      <tr>
+        <td><%= hp.project.name %></td>
+        <td><%= hp.income %></td>
+        <td><%= hp.historic_date.strftime("%B, %Y") %></td>
+        <td><%= link_to '[e]', "/historic_projects/edit/#{hp.id}" %></td>
+        <td><%= link_to '[-]', "/historic_projects/destroy/#{hp.id}", :confirm => 'Are you sure?', :method => :delete %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>

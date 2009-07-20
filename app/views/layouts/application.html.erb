@@ -11,7 +11,10 @@
 <body>
   <div id="header">
     <h1>Costantime</h1>
-  </div>  
+  </div>
+  <div id="userData">
+    <%= render :partial => "layouts/user_data" if logged_in? %>
+  </div>
   <div id="menu">
     <ul>
       <li><%= link_to 'Report Profit', "/person_projects/report_profit/#{Date.today}" %></li>
@@ -26,21 +29,9 @@
     </ul>
   </div>
   
+  <p style="color: green"><%= flash[:notice] %></p>
 
-<br />
-<br />
-<br />
-<br />
-  
-<p style="color: green"><%= flash[:notice] %></p>
-
-<% if current_user %>
-<ul id="menuh">
-  
-</ul>
-<% end %>
-<br />
-<%= yield %>
+  <%= yield %>
 
 </body>
 </html>

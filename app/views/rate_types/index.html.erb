@@ -1,20 +1,22 @@
-<h1>Listing rate_types</h1>
+<div id="contentPage">
+  <h1>Listing rate_types</h1>
 
-<table>
-  <tr>
-    <th>Name</th>
-  </tr>
+  <table>
+    <tr>
+      <th>Name</th>
+    </tr>
 
-<% @rate_types.each do |rate_type| %>
-  <tr>
-    <td><%=h rate_type.name %></td>
-    <td><%= link_to 'Show', rate_type %></td>
-    <td><%= link_to 'Edit', edit_rate_type_path(rate_type) %></td>
-    <td><%= link_to 'Destroy', rate_type, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
+    <% @rate_types.each do |rate_type| %>
+      <tr>
+        <td><%=h rate_type.name %></td>
+        <td><%= link_to 'Show', rate_type %></td>
+        <td><%= link_to 'Edit', edit_rate_type_path(rate_type) %></td>
+        <td><%= link_to 'Destroy', rate_type, :confirm => 'Are you sure?', :method => :delete %></td>
+      </tr>
+    <% end %>
+  </table>
 
-<br />
+  <br />
 
-<%= link_to 'New rate_type', new_rate_type_path %>
+  <%= link_to 'New rate_type', new_rate_type_path %>
+</div>

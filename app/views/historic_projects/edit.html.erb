@@ -1,23 +1,25 @@
-<h1>Editing historic_project</h1>
+<div id="contentPage">
+  <h1>Editing historic_project</h1>
 
-<% form_for(@historic_project) do |f| %>
-  <%= f.error_messages %>
+  <% form_for(@historic_project) do |f| %>
+    <%= f.error_messages %>
 
-  <p>
-    <%= f.label :project_id %><br />
-    <%= f.select :project_id,  @projects.collect {|p| [ p.name, p.id ] }, { :include_blank => false } %>
-  </p>
-  <p>
-    <%= f.label :income %><br />
-    <%= f.text_field :income %>
-  </p>
-  <p>
-    <%= f.label :historic_date %><br />
-    <%= f.date_select( :historic_date, :start_year => 2009, :discard_day => true, :include_blank => false) %>
-  </p>
-  <p>
-    <%= f.submit 'Update' %>
-  </p>
-<% end %>
+    <p>
+      <%= f.label :project_id %><br />
+      <%= f.select :project_id,  @projects.collect {|p| [ p.name, p.id ] }, { :include_blank => false } %>
+    </p>
+    <p>
+      <%= f.label :income %><br />
+      <%= f.text_field :income %>
+    </p>
+    <p>
+      <%= f.label :historic_date %><br />
+      <%= f.date_select( :historic_date, :start_year => 2009, :discard_day => true, :include_blank => false) %>
+    </p>
+    <p>
+      <%= f.submit 'Update' %>
+    </p>
+  <% end %>
 
-<%= link_to 'Back', new_historic_project_path %>
+  <%= link_to 'Back', new_historic_project_path %>
+</div>
