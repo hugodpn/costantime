@@ -1,3 +1,15 @@
+# == Schema Information
+# Schema version: 20090716152445
+#
+# Table name: projects
+#
+#  id         :integer         not null, primary key
+#  name       :string(255)
+#  company_id :integer
+#  created_at :datetime
+#  updated_at :datetime
+#
+
 class Project < ActiveRecord::Base
   has_many :person_projects
   has_many :people, :through => :person_projects

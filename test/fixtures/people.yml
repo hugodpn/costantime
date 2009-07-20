@@ -1,3 +1,17 @@
+# == Schema Information
+# Schema version: 20090716152445
+#
+# Table name: people
+#
+#  id            :integer         not null, primary key
+#  first_name    :string(255)
+#  last_name     :string(255)
+#  salary        :float
+#  working_hours :integer
+#  created_at    :datetime
+#  updated_at    :datetime
+#
+
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
