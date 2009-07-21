@@ -29,15 +29,4 @@ class Person < ActiveRecord::Base
     @per_pro
   end
 
-
-  def person_salary income, from, to
-
-    #    person_projects = person_filter(from, to)
-    #    @salaries = 0
-    #    debugger
-    #    person_projects.collect { |pp| @salaries += (pp.person.salary *   }
-    #      income - @salaries
-    end
-
-
-  end
+end
