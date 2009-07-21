@@ -20,5 +20,9 @@ class HistoricProject < ActiveRecord::Base
   validates_uniqueness_of :historic_date, :scope => "project_id"
 
 
+  def profit_between(from, to)
+    income
+  end
+
 
 end
