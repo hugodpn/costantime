@@ -21,7 +21,12 @@ class HistoricProject < ActiveRecord::Base
 
 
   def profit_between(from, to)
-    income
+    @sum = 0
+    self.project.person_filter(from, to).each do |pp|
+      @sum += pp.person.cost_by_percentage(pp.percentage)
+    end
+
+    income - @sum
   end
 
 
