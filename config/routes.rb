@@ -12,7 +12,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :rate_types
 
   map.resources :people
-  
+
   map.resources :person_projects, :collection => { :report_profit => :any }
 
   map.signup '/signup', :controller => 'users', :action => 'new'

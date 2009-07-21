@@ -1,5 +1,6 @@
 class ProjectsController < ApplicationController
   before_filter :load_selects, :only => [:new, :edit, :create, :update ]
+  layout 'admin'
 
   def load_selects
     @companies = Company.all
