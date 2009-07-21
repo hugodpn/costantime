@@ -1,4 +1,6 @@
 class RateTypesController < ApplicationController
+  layout 'admin'
+  
   # GET /rate_types
   # GET /rate_types.xml
   def index
