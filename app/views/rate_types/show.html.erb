@@ -1,8 +1,10 @@
-<p>
-  <b>Name:</b>
-  <%=h @rate_type.name %>
-</p>
+<div id="contentPage">
+  <p>
+    <b>Name:</b>
+    <%=h @rate_type.name %>
+  </p>
 
 
-<%= link_to 'Edit', edit_rate_type_path(@rate_type) %> |
-<%= link_to 'Back', rate_types_path %>
+  <%= link_to 'Edit', edit_rate_type_path(@rate_type) %> |
+  <%= link_to 'Back', rate_types_path %>
+</div>

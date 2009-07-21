@@ -1,16 +1,18 @@
-<h1>Editing project</h1>
+<div id="contentPage">
+  <h1>Editing project</h1>
 
 
-<% form_for(@project) do |f| %>
-  <%= f.error_messages %>
+  <% form_for(@project) do |f| %>
+    <%= f.error_messages %>
 
-  <%= render :partial => 'form', :locals => { :f => f } %>
+    <%= render :partial => 'form', :locals => { :f => f } %>
 
-  
-  <p>
-    <%= f.submit 'Update' %>
-  </p>
-<% end %>
 
-<%= link_to 'Show', @project %> |
-<%= link_to 'Back', projects_path %>
+    <p>
+      <%= f.submit 'Update' %>
+    </p>
+  <% end %>
+
+  <%= link_to 'Show', @project %> |
+  <%= link_to 'Back', projects_path %>
+</div>

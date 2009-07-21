@@ -1,0 +1,8 @@
+<strong>
+  Welcome, <%= self.current_user.login %>
+</strong> 
+<%= link_to "Logout", '/logout' %>
+<br />
+<small>
+  <%= "Logged in from: " + request.env['REMOTE_ADDR']  %>
+</small>
