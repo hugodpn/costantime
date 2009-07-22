@@ -17,8 +17,8 @@ class Person < ActiveRecord::Base
   has_many :projects, :through => :person_projects
   has_many :historic_costs
 
-  def cost_by_percentage percentage
-    self.salary * percentage / 100
+  def cost_by_percentage percentage, from, to
+    cost_between(from, to) * percentage / 100
   end
 
   def project_filter from, to
@@ -27,6 +27,15 @@ class Person < ActiveRecord::Base
       @per_pro << pp if pp.date_worked > from && pp.date_worked < to
     }
     @per_pro
+  end
+
+  def cost_between(from, to)
+       historic_cost = HistoricCost.find(:first, :conditions => ["person_id = ? and historic_date > ? and historic_date < ?", self.id, from, to])
+       if historic_cost
+         historic_cost.cost
+       else
+         0
+       end
   end
 
 end

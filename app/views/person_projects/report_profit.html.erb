@@ -15,6 +15,42 @@
 </div>
 
 <div id="contentPage">
+
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>Cost</th>
+    </tr>
+    <% @people.each do |person|  %>
+      <tr>
+        <td><%= person.first_name + " " + person.last_name %></td>
+        <td><%= text_field_tag "person_#{person.id}", person.cost_between(@from, @to).to_s %></td>
+      </tr>
+    <% end %>
+  </table>
+
+  <br />
+
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>Income</th>
+    </tr>
+    <% @projects.each do |project|  %>
+      <tr>
+        <td><%= project.name %></td>
+        <td><%= text_field_tag "project_#{project.id}", project.income_between(@from, @to).to_s %></td>
+      </tr>
+    <% end %>
+  </table>
+
+  <br />
+
+
+  <hr />
+
+
+
   <table>
     <tr>
       <th>Project</th>
@@ -22,21 +58,21 @@
       <th>Person - Project</th>
       <th>Profit</th>
     </tr>
-    <% @historic_projects.each do |hp|  %>
+    <% @projects.each do |project|  %>
       <tr>
-        <td><%= hp.project.name  %></td>
-        <td><%= hp.income  %></td>
+        <td><%= project.name %></td>
+        <td><%= project.income_between(@from, @to) %></td>
         <td>
-          <% hp.project.person_filter(@from, @to).each do |pp|  %>
-            + <%=  pp.person.first_name + " " + pp.person.last_name + " - " + pp.percentage.to_s + "%  - $ " + pp.person.cost_by_percentage(pp.percentage).to_s %><br />
-          <% end %>
-        </td>
-        <td>
-          $ <%= hp.profit_between(@from, @to) %>
-        </td>
-      </tr>
-    <% end %>
+          <% project.person_filter(@from, @to).each do |pp| %>
+          <%=  pp.person.first_name + " " + pp.person.last_name + " - " + pp.percentage.to_s + "%  - $ " + pp.person.cost_by_percentage(pp.percentage, @from, @to).to_s %><br />
+        <% end %>
+      </td>
+      <td><%= "xxx"  %></td>
+    </tr>
+  <% end %>
   </table>
+
+
 </div>
 
 

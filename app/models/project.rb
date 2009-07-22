@@ -28,5 +28,14 @@ class Project < ActiveRecord::Base
     @per_pro
   end
 
+  def income_between(from, to)
+       historic_project = HistoricProject.find(:first, :conditions => ["project_id = ? and historic_date > ? and historic_date < ?", self.id, from, to])
+       if historic_project
+         historic_project.income
+       else
+         0
+       end
+  end
+
 
 end

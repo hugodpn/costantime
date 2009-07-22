@@ -64,6 +64,9 @@ class PersonProjectsController < ApplicationController
 
   def report_profit
 
+    @people = Person.all
+    @projects = Project.all
+
     @requested_date = Date.civil(params[:requested_date][0..3].to_i, params[:requested_date][5..6].to_i, 1)
 
     @from = @requested_date - 1
