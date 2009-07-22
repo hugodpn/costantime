@@ -67,7 +67,7 @@
           <%=  pp.person.first_name + " " + pp.person.last_name + " - " + pp.percentage.to_s + "%  - $ " + pp.person.cost_by_percentage(pp.percentage, @from, @to).to_s %><br />
         <% end %>
       </td>
-      <td><%= "xxx"  %></td>
+      <td><%= project.profit_between(@from, @to) %></td>
     </tr>
   <% end %>
   </table>
