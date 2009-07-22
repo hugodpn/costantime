@@ -51,7 +51,7 @@ class HistoricCostsController < ApplicationController
     respond_to do |format|
       if @historic_cost.save
         flash[:notice] = 'HistoricCost was successfully created.'
-        format.html { redirect_to(new_historic_project_path) }
+        format.html { redirect_to(new_historic_cost_path) }
         format.xml  { render :xml => @historic_cost, :status => :created, :location => @historic_cost }
       else
         format.html { render :action => "new" }
@@ -68,7 +68,7 @@ class HistoricCostsController < ApplicationController
     respond_to do |format|
       if @historic_cost.update_attributes(params[:historic_cost])
         flash[:notice] = 'HistoricCost was successfully updated.'
-        format.html { redirect_to(new_historic_project_path) }
+        format.html { redirect_to(new_historic_cost_path) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -84,7 +84,7 @@ class HistoricCostsController < ApplicationController
     @historic_cost.destroy
 
     respond_to do |format|
-      format.html { redirect_to(new_historic_costs_path) }
+      format.html { redirect_to(new_historic_cost_path) }
       format.xml  { head :ok }
     end
   end
