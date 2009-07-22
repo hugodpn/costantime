@@ -30,12 +30,26 @@ class Person < ActiveRecord::Base
   end
 
   def cost_between(from, to)
-       historic_cost = HistoricCost.find(:first, :conditions => ["person_id = ? and historic_date > ? and historic_date < ?", self.id, from, to])
-       if historic_cost
-         historic_cost.cost
-       else
-         0
-       end
+    historic_cost = HistoricCost.find(:first, :conditions => ["person_id = ? and historic_date > ? and historic_date < ?", self.id, from, to])
+    if historic_cost
+      historic_cost.cost
+    else
+      0
+    end
+  end
+
+  def set_cost(cost, date)   
+    @requested_date = Date.civil(date[0..3].to_i, date[5..6].to_i, 1)
+    @from = @requested_date - 1
+    @to =  @requested_date >> 1
+    
+    historic_cost = HistoricCost.find(:first, :conditions => ["person_id = ? and historic_date > ? and historic_date < ?", self.id, @from, @to])
+    if historic_cost
+      historic_cost.cost = cost
+      historic_cost.save
+    else
+      0
+    end
   end
 
 end
