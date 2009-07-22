@@ -28,11 +28,11 @@
         <td><%= hp.income  %></td>
         <td>
           <% hp.project.person_filter(@from, @to).each do |pp|  %>
-            + <%=  pp.person.first_name + " " + pp.person.last_name + " - " + pp.percentage.to_s + "%  - " + pp.person.cost_by_percentage(pp.percentage).to_s %><br />
+            + <%=  pp.person.first_name + " " + pp.person.last_name + " - " + pp.percentage.to_s + "%  - $ " + pp.person.cost_by_percentage(pp.percentage).to_s %><br />
           <% end %>
         </td>
         <td>
-          <%#= hp.project.person_salary(hp.income, @from, @to) %>
+          $ <%= hp.profit_between(@from, @to) %>
         </td>
       </tr>
     <% end %>
