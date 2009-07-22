@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  person_id: 1
+  cost: 1.5
+  historic_date: 2009-07-22
+
+two:
+  person_id: 1
+  cost: 1.5
+  historic_date: 2009-07-22

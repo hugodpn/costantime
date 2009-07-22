@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :historic_costs
+
   map.resources :historic_projects
 
   map.resources :users

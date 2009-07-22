@@ -1,0 +1,46 @@
+<div id="sidebar">
+  <ul>
+    <li>
+      <h1>New historic_costs</h1>
+
+      <% form_for(@historic_cost) do |f| %>
+        <%= f.error_messages %>
+
+        <p>
+          <%= f.label :person_id %><br />
+          <%= f.select :person_id,  @people.collect {|p| [ p.first_name, p.id ] }, { :include_blank => false } %>
+        </p>
+        <p>
+          <%= f.label :cost %><br />
+          <%= f.text_field :cost, :size => 22 %>
+        </p>
+        <p>
+          <%= f.label :historic_date %><br />
+          <%= f.date_select( :historic_date, :start_year => 2009, :discard_day => true, :include_blank => false) %>
+        </p>
+        <p>
+          <%= f.submit 'Create' %>
+        </p>
+      <% end %>
+    </li>
+  </ul>
+</div>
+
+<div id="contentPage">
+  <table>
+    <tr>
+      <th>Person</th>
+      <th>Cost</th>
+      <th>Date</th>
+    </tr>
+    <% HistoricCost.find(:all).each do |hc|  %>
+      <tr>
+        <td><%= hc.person.first_name %></td>
+        <td><%= hc.cost %></td>
+        <td><%= hc.historic_date.strftime("%B, %Y") %></td>
+        <td><%= link_to '[e]', "/historic_costs/edit/#{hc.id}" %></td>
+        <td><%= link_to '[-]', "/historic_costs/destroy/#{hc.id}", :confirm => 'Are you sure?', :method => :delete %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>
