@@ -48,8 +48,7 @@ class Person < ActiveRecord::Base
       historic_cost.cost = cost
       historic_cost.save
     else
-      0
+      HistoricCost.create(:person_id => self.id, :cost => cost, :historic_date => @requested_date)
     end
   end
-
 end
