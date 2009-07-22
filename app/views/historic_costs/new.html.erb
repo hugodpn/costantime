@@ -8,7 +8,7 @@
 
         <p>
           <%= f.label :person_id %><br />
-          <%= f.select :person_id,  @people.collect {|p| [ p.first_name, p.id ] }, { :include_blank => false } %>
+          <%= f.select :person_id,  @people.collect {|p| [ p.first_name + " " + p.last_name, p.id ] }, { :include_blank => false } %>
         </p>
         <p>
           <%= f.label :cost %><br />
@@ -35,7 +35,7 @@
     </tr>
     <% HistoricCost.find(:all).each do |hc|  %>
       <tr>
-        <td><%= hc.person.first_name %></td>
+        <td><%= hc.person.first_name + " " + hc.person.last_name %></td>
         <td><%= hc.cost %></td>
         <td><%= hc.historic_date.strftime("%B, %Y") %></td>
         <td><%= link_to '[e]', "/historic_costs/edit/#{hc.id}" %></td>
