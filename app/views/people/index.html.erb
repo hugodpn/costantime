@@ -7,12 +7,13 @@
 </div>
 
 <div id="contentPage">
-  <table>
+  <table id="rounded-corner">
     <tr>
-      <th>First name</th>
+      <th class="rounded-top-left">First name</th>
       <th>Last name</th>
       <th>Salary</th>
       <th>Working hours</th>
+      <th class="rounded-top-right" colspan="3"></th>
     </tr>
 
     <% @people.each do |person| %>

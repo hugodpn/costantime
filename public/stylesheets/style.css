@@ -1,6 +1,6 @@
 body
 {
-    background-color: #F5F5F5;
+    background-color: #FFFFFF;
     background-image: url(/images/img_top.jpg);
     background-repeat: repeat-x;
     font-family: Arial;
@@ -36,9 +36,9 @@ img
 {
     position: absolute;
     top: -24px;
-    width: 100%;    
+    width: 100%;
     color: #000000;
-    font-style: oblique;    
+    font-style: oblique;
 }
 /* Header */
 
@@ -99,7 +99,7 @@ img
     margin-left: -5px;
     padding-left: 30px;
     padding-top: 10px;
-    height: 25px;    
+    height: 25px;
     background-image: url(/images/img_content_header.jpg);
     background-position: left;
     font-size: 12px;
@@ -108,12 +108,12 @@ img
 
 #sidebar ul 
 {    
-    padding-left: 0px;    
+    padding-left: 0px;
 }
 
 #sidebar li 
 {
-    padding-left: 5px;    
+    padding-left: 5px;
 }
 
 #sidebar a 
@@ -204,47 +204,48 @@ img
 }
 /*Error*/
 
+/*Table*/
 #rounded-corner
 {
-	font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
-	font-size: 12px;
-	margin: 45px;
-	width: 480px;
-	text-align: left;
-	border-collapse: collapse;
+    font-family: Sans-Serif;
+    font-size: 12px;
+    margin: 0px;
+    text-align: left;
+    border-collapse: collapse;
 }
 #rounded-corner th.rounded-top-left
 {
-	background: #b9c9fe url('/images/table-images/upper-left.png') left -1px no-repeat;
+    background: #b9c9fe url('/images/table-images/top-left.png') left -1px no-repeat;
 }
 #rounded-corner th.rounded-top-right
 {
-	background: #b9c9fe url('/images/table-images/upper-right.png') right -1px no-repeat;
+    background: #b9c9fe url('/images/table-images/top-right.png') right -1px no-repeat;
 }
 #rounded-corner th
 {
-	padding: 8px;
-	font-weight: normal;
-	font-size: 13px;
-	color: #039;
-	background: #b9c9fe;
+    padding: 8px;
+    font-weight: bold;
+    font-size: 13px;
+    color: #039;
+    background: #b9c9fe;
 }
 #rounded-corner td
 {
-	padding: 8px;
-	background: #e8edff;
-	border-top: 1px solid #fff;
-	color: #669;
+    padding: 3px;
+    background: #e8edff;
+    border-top: 1px solid #fff;
+    color: #669;
 }
 #rounded-corner td.rounded-bottom-left
 {
-	background: #e8edff url('/images/table-images/bottom-left.png') left bottom no-repeat;
+    background: #e8edff url('/images/table-images/bottom-left.png') left bottom no-repeat;
 }
 #rounded-corner td.rounded-bottom-right
 {
-	background: #e8edff url('/images/table-images/bottom-right.png') right bottom no-repeat;
+    background: #e8edff url('/images/table-images/bottom-right.png') right bottom no-repeat;
 }
 #rounded-corner tr:hover td
 {
-	background: #d0dafd;
+    background: #d0dafd;
 }
+/*Table*/
