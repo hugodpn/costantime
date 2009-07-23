@@ -203,3 +203,48 @@ img
     display: table;
 }
 /*Error*/
+
+#rounded-corner
+{
+	font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+	font-size: 12px;
+	margin: 45px;
+	width: 480px;
+	text-align: left;
+	border-collapse: collapse;
+}
+#rounded-corner th.rounded-top-left
+{
+	background: #b9c9fe url('/images/table-images/upper-left.png') left -1px no-repeat;
+}
+#rounded-corner th.rounded-top-right
+{
+	background: #b9c9fe url('/images/table-images/upper-right.png') right -1px no-repeat;
+}
+#rounded-corner th
+{
+	padding: 8px;
+	font-weight: normal;
+	font-size: 13px;
+	color: #039;
+	background: #b9c9fe;
+}
+#rounded-corner td
+{
+	padding: 8px;
+	background: #e8edff;
+	border-top: 1px solid #fff;
+	color: #669;
+}
+#rounded-corner td.rounded-bottom-left
+{
+	background: #e8edff url('/images/table-images/bottom-left.png') left bottom no-repeat;
+}
+#rounded-corner td.rounded-bottom-right
+{
+	background: #e8edff url('/images/table-images/bottom-right.png') right bottom no-repeat;
+}
+#rounded-corner tr:hover td
+{
+	background: #d0dafd;
+}
