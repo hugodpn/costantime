@@ -1,0 +1,130 @@
+<div id="sidebar">
+  <ul>
+    <li>
+      <h1>Report Profit</h1>
+
+      <h2><%= @requested_date.strftime("%B, %Y") %></h2>
+
+
+      <%= select_date(@requested_date, :prefix => 'date_worked', :start_year => 2005, :end_year => 2015, :discard_day => true, :include_blank => false) %>
+
+
+      <a href="#" onclick="parent.location='/person_projects/profit/' + $('date_worked_year').value + '-' + $('date_worked_month').value + '-1'">Change</a>
+    </li>
+  </ul>
+</div>
+
+<div id="contentPage">
+  <table>
+    <tr>
+      <td></td>
+      <td>Expense</td>
+      <% @projects.each do |project| %>
+        <td><%= project.name %></td>
+      <% end %>
+      <td>TOTAL</td>
+    </tr>
+
+    <tr>
+      <td>Income</td>
+      <td></td>
+      <% @projects.each do |project| %>
+        <td><%= text_field_tag "project_#{project.id}", project.income_between(@from, @to), :size => 5 %></td>
+      <% end %>
+      <td><%= Project.total_income(@from, @to) %></td>
+    </tr>
+
+    <% @people.each do |person| %>
+    <tr>
+      <td><%= person.first_name + " " + person.last_name %></td>
+      <td><%= text_field_tag "person_#{person.id}", person.cost_between(@from, @to), :size => 5 %></td>
+      <% @projects.each do |project| %>
+        <td><%= text_field_tag "person_project_#{person.id}_#{project.id}", "0", :size => 5 %></td>
+      <% end %>
+      <td>TPe</td>
+    </tr>
+    <% end %>
+    <tr>
+      <td>TOTAL</td>
+      <td><%= Person.total_cost(@from, @to) %></td>
+      <td>TPr</td>
+      <td>TPr</td>
+      <td>TPr</td>
+      <td>TPr</td>
+      <td>TT</td>
+    </tr>
+
+  </table>
+  <hr />
+  <table>
+    <tr>
+      <td></td>
+      <td>Expense</td>
+      <td>Projecto 1</td>
+      <td>Projecto 2</td>
+      <td>Projecto 3</td>
+      <td>Projecto 4</td>
+      <td>TOTAL</td>
+    </tr>
+
+    <tr>
+      <td>Income</td>
+      <td></td>
+      <td>xx</td>
+      <td>xx</td>
+      <td>xx</td>
+      <td>xx</td>
+      <td>T X</td>
+    </tr>
+
+    <tr>
+      <td>Person 1</td>
+      <td>yyyy</td>
+      <td>%</td>
+      <td>%</td>
+      <td>%</td>
+      <td>%</td>
+      <td>TPe</td>
+    </tr>
+    <tr>
+      <td>Person 2</td>
+      <td>yyyy</td>
+      <td>%</td>
+      <td>%</td>
+      <td>%</td>
+      <td>%</td>
+      <td>TPe</td>
+    </tr>
+    <tr>
+      <td>Person 3</td>
+      <td>yyyy</td>
+      <td>%</td>
+      <td>%</td>
+      <td>%</td>
+      <td>%</td>
+      <td>TPe</td>
+    </tr>
+    <tr>
+      <td>Person 3</td>
+      <td>yyyy</td>
+      <td>%</td>
+      <td>%</td>
+      <td>%</td>
+      <td>%</td>
+      <td>TPe</td>
+    </tr>
+    <tr>
+      <td>TOTAL</td>
+      <td>T Y</td>
+      <td>TPr</td>
+      <td>TPr</td>
+      <td>TPr</td>
+      <td>TPr</td>
+      <td>TT</td>
+    </tr>
+
+  </table>
+
+</div>
+
+

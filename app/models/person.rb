@@ -52,4 +52,13 @@ class Person < ActiveRecord::Base
     end
   end
 
+
+  def self.total_cost(from, to)
+    @total = 0
+    Person.all.each do |person|
+      @total += person.cost_between(from, to)
+    end
+    @total
+  end
+
 end
