@@ -31,7 +31,7 @@
       <% @projects.each do |project| %>
         <td><%= text_field_tag "project_#{project.id}", project.income_between(@from, @to), :size => 5 %></td>
       <% end %>
-      <td><%= Project.total_income(@from, @to) %></td>
+      <td><%= text_field_tag "project_income_total",  Project.total_income(@from, @to), :size => 5, :style => "background:#E6E6FA;" %></td>
     </tr>
 
     <% @people.each do |person| %>
@@ -41,90 +41,20 @@
       <% @projects.each do |project| %>
         <td><%= text_field_tag "person_project_#{person.id}_#{project.id}", PersonProject.percentage_between(@from, @to, person.id, project.id), :size => 5 %></td>
       <% end %>
-      <td>TPe</td>
+      <td><%= text_field_tag "subtotal_person_#{person.id}", person.subtotal_person(@from, @to), :size => 5, :style => "background:#FFF8DC;" %></td>
     </tr>
     <% end %>
     <tr>
       <td>TOTAL</td>
-      <td><%= Person.total_cost(@from, @to) %></td>
-      <td>TPr</td>
-      <td>TPr</td>
-      <td>TPr</td>
-      <td>TPr</td>
-      <td>TT</td>
+      <td><%= text_field_tag "person_cots_total",  Person.total_cost(@from, @to), :size => 5, :style => "background:#E6E6FA;" %></td>
+      <% @projects.each do |project| %>
+        <td><%= text_field_tag "subtotal_project_#{project.id}", project.subtotal_project(@from, @to), :size => 5, :style => "background:#FFF8DC;" %></td>
+      <% end %>
+      <td><%= text_field_tag "total", Project.total_income(@from, @to) - Person.total_cost(@from, @to), :size => 5, :style => "background:#D3D3D3;" %></td>
     </tr>
 
   </table>
-  <hr />
-  <table>
-    <tr>
-      <td></td>
-      <td>Expense</td>
-      <td>Projecto 1</td>
-      <td>Projecto 2</td>
-      <td>Projecto 3</td>
-      <td>Projecto 4</td>
-      <td>TOTAL</td>
-    </tr>
-
-    <tr>
-      <td>Income</td>
-      <td></td>
-      <td>xx</td>
-      <td>xx</td>
-      <td>xx</td>
-      <td>xx</td>
-      <td>T X</td>
-    </tr>
-
-    <tr>
-      <td>Person 1</td>
-      <td>yyyy</td>
-      <td>%</td>
-      <td>%</td>
-      <td>%</td>
-      <td>%</td>
-      <td>TPe</td>
-    </tr>
-    <tr>
-      <td>Person 2</td>
-      <td>yyyy</td>
-      <td>%</td>
-      <td>%</td>
-      <td>%</td>
-      <td>%</td>
-      <td>TPe</td>
-    </tr>
-    <tr>
-      <td>Person 3</td>
-      <td>yyyy</td>
-      <td>%</td>
-      <td>%</td>
-      <td>%</td>
-      <td>%</td>
-      <td>TPe</td>
-    </tr>
-    <tr>
-      <td>Person 3</td>
-      <td>yyyy</td>
-      <td>%</td>
-      <td>%</td>
-      <td>%</td>
-      <td>%</td>
-      <td>TPe</td>
-    </tr>
-    <tr>
-      <td>TOTAL</td>
-      <td>T Y</td>
-      <td>TPr</td>
-      <td>TPr</td>
-      <td>TPr</td>
-      <td>TPr</td>
-      <td>TT</td>
-    </tr>
-
-  </table>
-
+  
 </div>
 
 

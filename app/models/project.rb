@@ -43,15 +43,14 @@ class Project < ActiveRecord::Base
   def profit_between(from, to)
     
     income = income_between(from, to)
-
     @cost = 0
     
     person_project_filter(from, to).each do |pp|
       @cost += pp.person.cost_by_percentage(pp.percentage, from, to)
     end
-
     income - @cost
   end
+  alias_method :subtotal_project, :profit_between
 
   def self.total_income(from, to)
     @total = 0

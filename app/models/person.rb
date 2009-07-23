@@ -61,4 +61,15 @@ class Person < ActiveRecord::Base
     @total
   end
 
+  def subtotal_person(from, to)
+
+    @cost = 0
+
+    project_filter(from, to).each do |pp|
+      @cost += pp.person.cost_by_percentage(pp.percentage, from, to)
+    end
+
+    @cost
+  end
+
 end
