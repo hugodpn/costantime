@@ -52,6 +52,20 @@ class Project < ActiveRecord::Base
   end
   alias_method :subtotal_project, :profit_between
 
+  def set_income(income, date)
+    @requested_date = Date.civil(date[0..3].to_i, date[5..6].to_i, 1)
+    @from = @requested_date - 1
+    @to =  @requested_date >> 1
+
+    historic_income = HistoricProject.find(:first, :conditions => ["project_id = ? and historic_date > ? and historic_date < ?", self.id, @from, @to])
+    if historic_income
+      historic_income.income = income
+      historic_income.save
+    else
+      HistoricProject.create(:project_id => self.id, :income => income, :historic_date => @requested_date)
+    end
+  end
+
   def self.total_income(from, to)
     @total = 0
     Project.all.each do |project|

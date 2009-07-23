@@ -52,7 +52,6 @@ class Person < ActiveRecord::Base
     end
   end
 
-
   def self.total_cost(from, to)
     @total = 0
     Person.all.each do |person|
@@ -71,5 +70,4 @@ class Person < ActiveRecord::Base
 
     @cost
   end
-
 end
