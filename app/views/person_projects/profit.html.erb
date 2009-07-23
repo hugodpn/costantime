@@ -13,7 +13,7 @@
   <a href="#" onclick="parent.location='/person_projects/profit/' + $('date_worked_year').value + '-' + $('date_worked_month').value + '-1'">Change</a>
   <br />
   <br />
-  
+
   <% form_for :person_projects, :url => { :action => "update" } do  %>
     <%= hidden_field_tag "requested_date", @requested_date   %>
     <table id="rounded-corner">
@@ -30,36 +30,54 @@
         <td>Income</td>
         <td></td>
         <% @projects.each do |project| %>
-          <td><%= text_field_tag "project_#{project.id}", project.income_between(@from, @to), :size => 5 %></td>
+          <td><%= text_field_tag "project_#{project.id}", project.income_between(@from, @to), :size => 5,
+            :style => "background:#F0FFF0;", :onkeypress => "return isNumberKey(event)"  %></td>
         <% end %>
-        <td><%= text_field_tag "project_income_total",  Project.total_income(@from, @to), :size => 5, :style => "background:#E6E6FA;" %></td>
+        <td><%= text_field_tag "project_income_total",  Project.total_income(@from, @to), :size => 5, 
+              :style => "background:#E6E6FA;", :onkeypress => "return isNumberKey(event)"  %></td>
       </tr>
 
       <% @people.each do |person| %>
         <tr>
           <td><%= person.first_name + " " + person.last_name %></td>
-          <td><%= text_field_tag "person_#{person.id}", person.cost_between(@from, @to), :size => 5 %></td>
+          <td><%= text_field_tag "person_#{person.id}", person.cost_between(@from, @to), 
+                  :size => 5, :style => "background:#F0FFF0;", :onkeypress => "return isNumberKey(event)"  %></td>
           <% @projects.each do |project| %>
-            <td><%= text_field_tag "person_project_#{person.id}_#{project.id}", PersonProject.percentage_between(@from, @to, person.id, project.id), :size => 5 %></td>
+            <td><%= text_field_tag "person_project_#{person.id}_#{project.id}", PersonProject.percentage_between(@from, @to, person.id, project.id),
+                  :size => 5, :onkeypress => "return isNumberKey(event)"  %></td>
           <% end %>
-          <td><%= text_field_tag "subtotal_person_#{person.id}", person.subtotal_person(@from, @to), :size => 5, :style => "background:#FFF8DC;" %></td>
+          <td><%= text_field_tag "subtotal_person_#{person.id}", person.subtotal_person(@from, @to), :size => 5, 
+                :style => "background:#FFF8DC;", :onkeypress => "return isNumberKey(event)"  %></td>
         </tr>
       <% end %>
       <tr>
         <td class="rounded-bottom-left">TOTAL</td>
-        <td><%= text_field_tag "person_cots_total",  Person.total_cost(@from, @to), :size => 5, :style => "background:#E6E6FA;" %></td>
+        <td><%= text_field_tag "person_cots_total",  Person.total_cost(@from, @to), :size => 5, 
+              :style => "background:#E6E6FA;", :onkeypress => "return isNumberKey(event)"  %></td>
         <% @projects.each do |project| %>
-          <td><%= text_field_tag "subtotal_project_#{project.id}", project.subtotal_project(@from, @to), :size => 5, :style => "background:#FFF8DC;" %></td>
+          <td><%= text_field_tag "subtotal_project_#{project.id}", project.subtotal_project(@from, @to), :size => 5, 
+              :style => "background:#FFF8DC;", :onkeypress => "return isNumberKey(event)"  %></td>
         <% end %>
-        <td class="rounded-bottom-right"><%= text_field_tag "total", Project.total_income(@from, @to) - Person.total_cost(@from, @to), :size => 5, :style => "background:#D3D3D3;" %></td>
+        <td class="rounded-bottom-right"><%= text_field_tag "total", Project.total_income(@from, @to) - Person.total_cost(@from, @to), 
+  :size => 5, :style => "background:#D3D3D3;", :onkeypress => "return isNumberKey(event)"  %></td>
       </tr>
 
     </table>
 
-  <br />
-  <%= submit_tag "Save" %>
+    <%= submit_tag "Save" %>
   <% end %>
 
 </div>
 
+<script language="javascript">
+  <!--
+  function isNumberKey(evt)
+  {
+    var charCode = (evt.which) ? evt.which : event.keyCode
+    if (charCode > 31 && (charCode < 48 || charCode > 57))
+      return false;
 
+    return true;
+  }
+  //-->
+</script>
