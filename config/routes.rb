@@ -15,7 +15,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :people
 
-  map.resources :person_projects, :collection => { :profit => :any }
+  map.resources :person_projects, :collection => { :profit => :any, :graph_code => :any }
 
   map.signup '/signup', :controller => 'users', :action => 'new'
   map.login '/login', :controller => 'sessions', :action => 'new'
@@ -26,7 +26,7 @@ ActionController::Routing::Routes.draw do |map|
   # Sample of regular route:
   #   map.connect 'products/:id', :controller => 'catalog', :action => 'view'
      map.connect '/person_projects/destroy/:id/:requested_date', :controller => 'person_projects', :action => 'destroy'
-     map.connect '/person_projects/report_profit/:requested_date', :controller => 'person_projects', :action => 'report_profit'
+     map.connect '/person_projects/graph_code/:requested_date', :controller => 'person_projects', :action => 'graph_code'
      map.connect '/person_projects/profit/:requested_date', :controller => 'person_projects', :action => 'profit'
   # Keep in mind you can assign values other than :controller and :action
 
