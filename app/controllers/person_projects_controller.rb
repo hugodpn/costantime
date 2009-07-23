@@ -62,21 +62,6 @@ class PersonProjectsController < ApplicationController
   end
 
 
-  def report_profit
-
-    @people = Person.all
-    @projects = Project.all
-
-    @requested_date = Date.civil(params[:requested_date][0..3].to_i, params[:requested_date][5..6].to_i, 1)
-
-    @from = @requested_date - 1
-    @to =  @requested_date >> 1
-
-    @historic_projects = HistoricProject.find(:all, :conditions => ["historic_date > ? and historic_date < ?", @from, @to])
-    
-
-  end
-
 
   def profit
     @people = Person.all
@@ -89,6 +74,22 @@ class PersonProjectsController < ApplicationController
 
     @historic_projects = HistoricProject.find(:all, :conditions => ["historic_date > ? and historic_date < ?", @from, @to])
     
+  end
+
+  def update
+
+    Person.all.each do |person|
+      person.set_cost(params["person_#{person.id}"], params["requested_date"])
+      
+      Project.all.each do |project|
+        project.set_income(params["project_#{project.id}"], params["requested_date"])
+        PersonProject.set_person_project(person.id, project.id, params["person_project_#{person.id}_#{project.id}"], params["requested_date"])
+      end
+      
+    end
+
+    redirect_to("/person_projects/profit/#{params[:requested_date]}")
+
   end
 
 

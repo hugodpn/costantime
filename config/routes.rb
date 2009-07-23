@@ -15,7 +15,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :people
 
-  map.resources :person_projects, :collection => { :report_profit => :any, :profit => :any }
+  map.resources :person_projects, :collection => { :profit => :any }
 
   map.signup '/signup', :controller => 'users', :action => 'new'
   map.login '/login', :controller => 'sessions', :action => 'new'
