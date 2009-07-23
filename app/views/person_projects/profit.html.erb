@@ -2,20 +2,18 @@
   <ul>
     <li>
       <h1>Report Profit</h1>
-
-      <h2><%= @requested_date.strftime("%B, %Y") %></h2>
-
-
-      <%= select_date(@requested_date, :prefix => 'date_worked', :start_year => 2005, :end_year => 2015, :discard_day => true, :include_blank => false) %>
-
-
-      <a href="#" onclick="parent.location='/person_projects/profit/' + $('date_worked_year').value + '-' + $('date_worked_month').value + '-1'">Change</a>
     </li>
   </ul>
 </div>
 
 <div id="contentPage">
 
+  <h2><%= @requested_date.strftime("%B, %Y") %></h2>
+  <%= select_date(@requested_date, :prefix => 'date_worked', :start_year => 2005, :end_year => 2015, :discard_day => true, :include_blank => false) %>
+  <a href="#" onclick="parent.location='/person_projects/profit/' + $('date_worked_year').value + '-' + $('date_worked_month').value + '-1'">Change</a>
+  <br />
+  <br />
+  
   <% form_for :person_projects, :url => { :action => "update" } do  %>
     <%= hidden_field_tag "requested_date", @requested_date   %>
     <table>

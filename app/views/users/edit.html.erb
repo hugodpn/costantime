@@ -1,6 +1,12 @@
-<div id="contentPage">
-  <h1>Edit User</h1>
+<div id="sidebar">
+  <ul>
+    <li>
+      <h1>Edit user</h1>
+    </li>
+  </ul>
+</div>
 
+<div id="contentPage">
   <% @user.password = @user.password_confirmation = nil %>
 
   <%= error_messages_for :user %>

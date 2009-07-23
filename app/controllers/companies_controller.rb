@@ -1,5 +1,4 @@
 class CompaniesController < ApplicationController
-  layout 'admin'
   
   # GET /companies
   # GET /companies.xml

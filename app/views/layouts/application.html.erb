@@ -18,12 +18,10 @@
     <div id="menu">
       <ul>
         <li><%= link_to 'Profit', "/person_projects/profit/#{Date.today}" %></li>
-        <li><%= link_to 'Person to Project', "/person_projects/new/#{Date.today}" %></li>
-        <li><%= link_to 'Project Income', '/historic_projects/new' %></li>
-        <li><%= link_to 'People costs', '/historic_costs/new' %></li>
-        <li><%= link_to "Admin", people_path %></li>
         <li><%= link_to "People", people_path %></li>
         <li><%= link_to "Projects", projects_path %></li>
+        <li><%= link_to "Companies", companies_path %></li>
+        <li><%= link_to "Users", users_path %></li>
       </ul>
     </div>
 

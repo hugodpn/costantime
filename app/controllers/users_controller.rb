@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-  layout 'admin'
   
   # Be sure to include AuthenticationSystem in Application Controller instead
   include AuthenticatedSystem
