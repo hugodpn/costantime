@@ -2,8 +2,7 @@ class ProjectsController < ApplicationController
   before_filter :load_selects, :only => [:new, :edit, :create, :update ]
 
   def load_selects
-    @companies = Company.all
-    @rate_types = RateType.all
+    @companies = Company.all    
   end
 
   # GET /projects
@@ -31,9 +30,7 @@ class ProjectsController < ApplicationController
   # GET /projects/new
   # GET /projects/new.xml
   def new
-    @project = Project.new
-    @companies = Company.all
-    @rate_types = RateType.all
+    @project = Project.new    
 
     respond_to do |format|
       format.html # new.html.erb

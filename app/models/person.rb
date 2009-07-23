@@ -17,6 +17,9 @@ class Person < ActiveRecord::Base
   has_many :projects, :through => :person_projects
   has_many :historic_costs
 
+  validates_presence_of :first_name
+  validates_presence_of :last_name
+
   def cost_by_percentage percentage, from, to
     cost_between(from, to) * percentage / 100
   end
