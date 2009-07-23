@@ -39,7 +39,7 @@
       <td><%= person.first_name + " " + person.last_name %></td>
       <td><%= text_field_tag "person_#{person.id}", person.cost_between(@from, @to), :size => 5 %></td>
       <% @projects.each do |project| %>
-        <td><%= text_field_tag "person_project_#{person.id}_#{project.id}", "0", :size => 5 %></td>
+        <td><%= text_field_tag "person_project_#{person.id}_#{project.id}", PersonProject.percentage_between(@from, @to, person.id, project.id), :size => 5 %></td>
       <% end %>
       <td>TPe</td>
     </tr>

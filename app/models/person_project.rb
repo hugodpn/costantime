@@ -20,4 +20,14 @@ class PersonProject < ActiveRecord::Base
   validates_numericality_of :percentage, :greater_than_or_equal_to => 0
   validates_numericality_of :percentage, :less_than_or_equal_to => 100
 
+
+  def self.percentage_between(from, to, person_id, project_id)
+    person_project = PersonProject.first :conditions => ["project_id = ? and person_id = ? and date_worked > ? and date_worked < ?", project_id, person_id, from, to]
+    if person_project
+      person_project.percentage
+    else
+      0
+    end
+  end
+
 end
