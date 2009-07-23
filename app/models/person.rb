@@ -51,4 +51,12 @@ class Person < ActiveRecord::Base
       HistoricCost.create(:person_id => self.id, :cost => cost, :historic_date => @requested_date)
     end
   end
+
+  def self.total_cost(from, to)
+    @total = 0
+    Person.all.each do |person|
+      @total += person.cost_between(from, to)
+    end
+    @total
+  end
 end

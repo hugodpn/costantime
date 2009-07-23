@@ -67,4 +67,12 @@ class Project < ActiveRecord::Base
     end
   end
 
+  def self.total_income(from, to)
+    @total = 0
+    Project.all.each do |project|
+      @total += project.income_between(from, to)
+    end
+    @total
+  end
+
 end
