@@ -68,7 +68,8 @@ class Person < ActiveRecord::Base
     @cost = 0
 
     project_filter(from, to).each do |pp|
-      @cost += pp.person.cost_by_percentage(pp.percentage, from, to)
+#      @cost += pp.person.cost_by_percentage(pp.percentage, from, to)
+      @cost += pp.percentage
     end
 
     @cost
