@@ -47,7 +47,7 @@
 
             <% @people.each do |person| %>
               <tr>
-                <td><%= person.first_name + " " + person.last_name %></td>
+                <td style="width: 150px;"><%= person.first_name + " " + person.last_name %></td>
                 <td><%= text_field_tag "person_#{person.id}", person.cost_between(@from, @to).to_i,
                   :size => 5, :style => "background:#F0FFF0;", :onkeypress => "return isNumberKey(event)"  %></td>
                 <% @projects.each do |project| %>

@@ -210,8 +210,8 @@ class PersonProjectsController < ApplicationController
     x_labels = XAxisLabels.new
     x_labels.set_vertical()
 
-    months.each do |text|
-      tmp << XAxisLabel.new(text, '#0000ff', 12, 'diagonal')
+    months.each do |text|      
+      tmp << XAxisLabel.new(text[5..6] + "/" + text[2..3] , '#0000ff', 12, 'diagonal')
     end
 
     x_labels.labels = tmp
