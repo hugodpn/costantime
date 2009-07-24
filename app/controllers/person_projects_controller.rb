@@ -61,8 +61,6 @@ class PersonProjectsController < ApplicationController
     end
   end
 
-
-
   def profit
     @people = Person.all
     @projects = Project.all
@@ -77,49 +75,90 @@ class PersonProjectsController < ApplicationController
     
   end
 
+  COLORS = ["#0000FF", "#DC143C", "#ADFF2F", "#FF69B4", "#800080", "#40E0D0", "#9ACD32", "#D8BFD8", "#778899", "#FF4500"]
+
+  def last_months(count, date)
+
+    @requested_date = Date.civil(params[:requested_date][0..3].to_i, params[:requested_date][5..6].to_i, 1)
+
+    @from = @requested_date - 1
+    @to =  @requested_date >> 1
+
+
+    months = []
+    count.times do |i|
+      tmp_time = @requested_date << (count - i -1)
+      months << tmp_time.strftime("%Y-%m-1")
+    end
+
+    projects = []
+    Project.all.each do |project|
+      p = []
+      p << project.name
+      p << profit_months(project, months)
+      p << COLORS[projects.size]
+      projects << p
+    end
+
+
+    range = [0,26000,10000]
+    
+    return projects, months, range, [25000, 20000, 22000, 22000]
+
+  end
+
+  def profit_months(project, months)
+
+
+    subtotal = []
+
+    months.each do |month|
+
+      requested_date = Date.civil(month[0..3].to_i, month[5..6].to_i, 1)
+
+      from = requested_date - 1
+      to =  requested_date >> 1
+
+      subtotal << project.subtotal_project(from, to).to_i
+
+    end
+
+
+    subtotal
+  end
+
   def graph_code
 
-    puts params.inspect
-    
-    # based on this example - http://teethgrinder.co.uk/open-flash-chart-2/data-lines-2.php
-    # and parts from this example - http://teethgrinder.co.uk/open-flash-chart-2/x-axis-labels-3.php
-    title = Title.new("PERSON - PROFIT (lasted 3 months)")
+    title = Title.new("PROJECT - PROFIT (last 3 months)")
 
-    data1 = []
-    data2 = []
-    data3 = []
+    information, months, range, total_month = last_months(4, params[:requested_date])
 
-    5.times do |x|
-      data1 << rand(5) + 1
-      data2 << rand(6) + 7
-      data3 << rand(5) + 14
-    end
 
     line_dot = LineDot.new
     line_dot.width = 4
     line_dot.colour = '#DFC329'
     line_dot.dot_size = 5
-    line_dot.values = data1
+    line_dot.values = total_month
+    line_dot.text = "Total Month"
 
-    line_hollow = LineHollow.new
-    line_hollow.width = 1
-    line_hollow.colour = '#6363AC'
-    line_hollow.dot_size = 5
-    line_hollow.values = data2
-
-    line = Line.new
-    line.width = 1
-    line.colour = '#5E4725'
-    line.dot_size = 5
-    line.values = data3
-
+    @line_project = []
+    information.each do |data|
+      line = Line.new
+      line.width = 1
+      line.colour = data[2]
+      line.dot_size = 5
+      line.values = data[1]
+      line.text = data[0]
+      @line_project << line
+    end
+    
     # Added these lines since the previous tutorial
     tmp = []
     x_labels = XAxisLabels.new
     x_labels.set_vertical()
 
-    %w(one two three four five).each do |text|
-      tmp << XAxisLabel.new(text, '#0000ff', 20, 'diagonal')
+    months.each do |text|
+      tmp << XAxisLabel.new(text, '#0000ff', 12, 'diagonal')
     end
 
     x_labels.labels = tmp
@@ -129,13 +168,13 @@ class PersonProjectsController < ApplicationController
     # new up to here ...
 
     y = YAxis.new
-    y.set_range(0,20,5)
+    y.set_range(range[0], range[1], range[2])
 
     x_legend = XLegend.new("Months")
-    x_legend.set_style('{font-size: 20px; color: #778877}')
+    x_legend.set_style('{font-size: 12px; color: #778877}')
 
-    y_legend = YLegend.new("MY Y Legend")
-    y_legend.set_style('{font-size: 20px; color: #770077}')
+    y_legend = YLegend.new("Profit")
+    y_legend.set_style('{font-size: 12px; color: #770077}')
 
     chart =OpenFlashChart.new
     chart.set_title(title)
@@ -145,11 +184,84 @@ class PersonProjectsController < ApplicationController
     chart.y_axis = y
 
     chart.add_element(line_dot)
-    chart.add_element(line_hollow)
-    chart.add_element(line)
+    
+    @line_project.each do |data|
+      chart.add_element data
+    end
 
     render :text => chart.to_s
   end
+
+
+  #  def graph_code
+  #
+  #    title = Title.new("PERSON - PROFIT (last 3 months)")
+  #
+  #    data1 = []
+  #    data2 = []
+  #    data3 = []
+  #
+  #    5.times do |x|
+  #      data1 << rand(5) + 1
+  #      data2 << rand(6) + 7
+  #      data3 << rand(5) + 14
+  #    end
+  #
+  #    line_dot = LineDot.new
+  #    line_dot.width = 4
+  #    line_dot.colour = '#DFC329'
+  #    line_dot.dot_size = 5
+  #    line_dot.values = data1
+  #
+  #    line_hollow = LineHollow.new
+  #    line_hollow.width = 1
+  #    line_hollow.colour = '#6363AC'
+  #    line_hollow.dot_size = 5
+  #    line_hollow.values = data2
+  #
+  #    line = Line.new
+  #    line.width = 1
+  #    line.colour = '#5E4725'
+  #    line.dot_size = 5
+  #    line.values = data3
+  #
+  #    # Added these lines since the previous tutorial
+  #    tmp = []
+  #    x_labels = XAxisLabels.new
+  #    x_labels.set_vertical()
+  #
+  #    %w(one two three four five).each do |text|
+  #      tmp << XAxisLabel.new(text, '#0000ff', 20, 'diagonal')
+  #    end
+  #
+  #    x_labels.labels = tmp
+  #
+  #    x = XAxis.new
+  #    x.set_labels(x_labels)
+  #    # new up to here ...
+  #
+  #    y = YAxis.new
+  #    y.set_range(0,20,5)
+  #
+  #    x_legend = XLegend.new("Months")
+  #    x_legend.set_style('{font-size: 20px; color: #778877}')
+  #
+  #    y_legend = YLegend.new("MY Y Legend")
+  #    y_legend.set_style('{font-size: 20px; color: #770077}')
+  #
+  #    chart =OpenFlashChart.new
+  #    chart.set_title(title)
+  #    chart.set_x_legend(x_legend)
+  #    chart.set_y_legend(y_legend)
+  #    chart.x_axis = x # Added this line since the previous tutorial
+  #    chart.y_axis = y
+  #
+  #    chart.add_element(line_dot)
+  #    chart.add_element(line_hollow)
+  #    chart.add_element(line)
+  #
+  #    render :text => chart.to_s
+  #  end
 
 
   def update
