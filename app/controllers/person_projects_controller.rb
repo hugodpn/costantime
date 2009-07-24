@@ -29,7 +29,6 @@ class PersonProjectsController < ApplicationController
     @from = @requested_date - 1
     @to =  @requested_date >> 1
 
-
     @people = Person.all
     @projects = Project.all
   end
@@ -156,7 +155,7 @@ class PersonProjectsController < ApplicationController
 
     title = Title.new("PROJECT - PROFIT (last 3 months)")
 
-    information, months, range, total_month = last_months(4, params[:requested_date])
+    projects, months, range, total_month = last_months(4, params[:requested_date])
 
     line_dot = LineDot.new
     line_dot.width = 4
@@ -166,7 +165,7 @@ class PersonProjectsController < ApplicationController
     line_dot.text = "TOTAL"
 
     @line_project = []
-    information.each do |data|
+    projects.each do |data|
       line = Line.new
       line.width = 1
       line.colour = data[2]
@@ -217,77 +216,6 @@ class PersonProjectsController < ApplicationController
   end
 
 
-  #  def graph_code
-  #
-  #    title = Title.new("PERSON - PROFIT (last 3 months)")
-  #
-  #    data1 = []
-  #    data2 = []
-  #    data3 = []
-  #
-  #    5.times do |x|
-  #      data1 << rand(5) + 1
-  #      data2 << rand(6) + 7
-  #      data3 << rand(5) + 14
-  #    end
-  #
-  #    line_dot = LineDot.new
-  #    line_dot.width = 4
-  #    line_dot.colour = '#DFC329'
-  #    line_dot.dot_size = 5
-  #    line_dot.values = data1
-  #
-  #    line_hollow = LineHollow.new
-  #    line_hollow.width = 1
-  #    line_hollow.colour = '#6363AC'
-  #    line_hollow.dot_size = 5
-  #    line_hollow.values = data2
-  #
-  #    line = Line.new
-  #    line.width = 1
-  #    line.colour = '#5E4725'
-  #    line.dot_size = 5
-  #    line.values = data3
-  #
-  #    # Added these lines since the previous tutorial
-  #    tmp = []
-  #    x_labels = XAxisLabels.new
-  #    x_labels.set_vertical()
-  #
-  #    %w(one two three four five).each do |text|
-  #      tmp << XAxisLabel.new(text, '#0000ff', 20, 'diagonal')
-  #    end
-  #
-  #    x_labels.labels = tmp
-  #
-  #    x = XAxis.new
-  #    x.set_labels(x_labels)
-  #    # new up to here ...
-  #
-  #    y = YAxis.new
-  #    y.set_range(0,20,5)
-  #
-  #    x_legend = XLegend.new("Months")
-  #    x_legend.set_style('{font-size: 20px; color: #778877}')
-  #
-  #    y_legend = YLegend.new("MY Y Legend")
-  #    y_legend.set_style('{font-size: 20px; color: #770077}')
-  #
-  #    chart =OpenFlashChart.new
-  #    chart.set_title(title)
-  #    chart.set_x_legend(x_legend)
-  #    chart.set_y_legend(y_legend)
-  #    chart.x_axis = x # Added this line since the previous tutorial
-  #    chart.y_axis = y
-  #
-  #    chart.add_element(line_dot)
-  #    chart.add_element(line_hollow)
-  #    chart.add_element(line)
-  #
-  #    render :text => chart.to_s
-  #  end
-
-
   def update
 
     Person.all.each do |person|
@@ -304,5 +232,18 @@ class PersonProjectsController < ApplicationController
 
   end
 
+  def dashboard
+    @people = Person.all
+    @projects = Project.all
+    @graph = open_flash_chart_object(600,300,"/person_projects/graph_code/#{params[:requested_date]}")
+    @graph2 = open_flash_chart_object(600,300,"/person_projects/graph_code/#{params[:requested_date]}")
+
+    @requested_date = Date.civil(params[:requested_date][0..3].to_i, params[:requested_date][5..6].to_i, 1)
+
+    @from = @requested_date - 1
+    @to =  @requested_date >> 1
+
+    @historic_projects = HistoricProject.find(:all, :conditions => ["historic_date > ? and historic_date < ?", @from, @to])
+  end
 
 end

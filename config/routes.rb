@@ -15,7 +15,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :people
 
-  map.resources :person_projects, :collection => { :profit => :any, :graph_code => :any }
+  map.resources :person_projects, :collection => { :profit => :any, :graph_code => :any, :dashboard => :any }
 
   map.signup '/signup', :controller => 'users', :action => 'new'
   map.login '/login', :controller => 'sessions', :action => 'new'
@@ -28,6 +28,8 @@ ActionController::Routing::Routes.draw do |map|
      map.connect '/person_projects/destroy/:id/:requested_date', :controller => 'person_projects', :action => 'destroy'
      map.connect '/person_projects/graph_code/:requested_date', :controller => 'person_projects', :action => 'graph_code'
      map.connect '/person_projects/profit/:requested_date', :controller => 'person_projects', :action => 'profit'
+     map.connect '/person_projects/dashboard/:requested_date', :controller => 'person_projects', :action => 'dashboard'
+     map.connect '/person_projects/dashboard/:requested_date/:from/:to/:project_id', :controller => 'person_projects', :action => 'dashboard'
   # Keep in mind you can assign values other than :controller and :action
 
   # Sample of named route:
@@ -57,7 +59,7 @@ ActionController::Routing::Routes.draw do |map|
 
   # You can have the root of your site routed with map.root -- just remember to delete public/index.html.
   # map.root :controller => "welcome"
-   map.root :controller => "projects"
+   map.root :controller => "person_projects", :action => "dashboard"
 
   # See how all your routes lay out with "rake routes"
 

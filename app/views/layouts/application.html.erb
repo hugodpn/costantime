@@ -17,6 +17,7 @@
     </div>
     <div id="menu">
       <ul>
+        <li><%= link_to 'Dashboard', "/person_projects/dashboard/#{Date.today}" %></li>
         <li><%= link_to 'Profit', "/person_projects/profit/#{Date.today}" %></li>
         <li><%= link_to "People", people_path %></li>
         <li><%= link_to "Projects", projects_path %></li>
