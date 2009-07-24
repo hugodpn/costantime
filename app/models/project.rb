@@ -43,14 +43,19 @@ class Project < ActiveRecord::Base
   def profit_between(from, to)
     
     income = income_between(from, to)
+    income - project_cost(from, to)
+
+  end
+  alias_method :subtotal_project, :profit_between
+
+
+  def project_cost(from, to)
     @cost = 0
-    
     person_project_filter(from, to).each do |pp|
       @cost += pp.person.cost_by_percentage(pp.percentage, from, to)
     end
-    income - @cost
+    @cost
   end
-  alias_method :subtotal_project, :profit_between
 
   def set_income(income, date)
     @requested_date = Date.civil(date[0..3].to_i, date[5..6].to_i, 1)

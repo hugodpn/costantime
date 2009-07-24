@@ -12,12 +12,12 @@
 
   <h2><%= @requested_date.strftime("%B, %Y") %></h2>
   <%= hidden_field_tag "date_worked", params[:requested_date] %>
-  From: <%= select_date(@requested_date, :prefix => 'date_from', :start_year => 2005, :end_year => 2015, :discard_day => true, :include_blank => false) %>
-  To: <%= select_date(@requested_date, :prefix => 'date_to', :start_year => 2005, :end_year => 2015, :discard_day => true, :include_blank => false) %>
-  Project: <%= select("person_project", "project_id", Project.all.collect {|p| [ p.name, p.id ] }, { :include_blank => false }) %>
+  From: <%= select_date(@from, :prefix => 'date_from', :start_year => 2005, :end_year => 2015, :discard_day => true, :include_blank => false) %>
+  To: <%= select_date(@to, :prefix => 'date_to', :start_year => 2005, :end_year => 2015, :discard_day => true, :include_blank => false) %>
+  Project: <%= select("project", "id", Project.all.collect {|p| [ p.name, p.id ] }, { :include_blank => false }) %>
   <a href="#" onclick="parent.location='/person_projects/dashboard/' + $('date_worked').value +'/' +
       $('date_from_year').value + '-' + $('date_from_month').value + '-1' +'/' +
-      $('date_to_year').value + '-' + $('date_to_month').value + '-1'+'/' + $('person_project_project_id').value ">Change</a>
+      $('date_to_year').value + '-' + $('date_to_month').value + '-1'+'/' + $('project_id').value ">Change</a>
   <br />
   <br />
 
@@ -26,11 +26,11 @@
     <tr>
       <td valign="top" align="center">
         <script type="text/javascript" src="/javascripts/swfobject.js"></script>
-        <%= @graph %>
+        <%= @graph2 %>
       </td>
       <td valign="top" align="center">
         <script type="text/javascript" src="/javascripts/swfobject.js"></script>
-        <%= @graph2 %>
+        <%= @graph %>
       </td>
     </tr>
   </table>

@@ -26,7 +26,7 @@ ActionController::Routing::Routes.draw do |map|
   # Sample of regular route:
   #   map.connect 'products/:id', :controller => 'catalog', :action => 'view'
      map.connect '/person_projects/destroy/:id/:requested_date', :controller => 'person_projects', :action => 'destroy'
-     map.connect '/person_projects/graph_code/:requested_date', :controller => 'person_projects', :action => 'graph_code'
+     map.connect '/person_projects/graph_code/:requested_date/:count/:project_id', :controller => 'person_projects', :action => 'graph_code'
      map.connect '/person_projects/profit/:requested_date', :controller => 'person_projects', :action => 'profit'
      map.connect '/person_projects/dashboard/:requested_date', :controller => 'person_projects', :action => 'dashboard'
      map.connect '/person_projects/dashboard/:requested_date/:from/:to/:project_id', :controller => 'person_projects', :action => 'dashboard'

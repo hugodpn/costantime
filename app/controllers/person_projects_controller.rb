@@ -76,9 +76,9 @@ class PersonProjectsController < ApplicationController
 
   COLORS = ["#0000FF", "#DC143C", "#ADFF2F", "#FF69B4", "#800080", "#40E0D0", "#9ACD32", "#D8BFD8", "#778899", "#FF4500"]
 
-  def last_months(count, date)
+  def last_months(count, date, project_id)
 
-    @requested_date = Date.civil(params[:requested_date][0..3].to_i, params[:requested_date][5..6].to_i, 1)
+    @requested_date = Date.civil(date[0..3].to_i, date[5..6].to_i, 1)
 
     @from = @requested_date - 1
     @to =  @requested_date >> 1
@@ -91,23 +91,42 @@ class PersonProjectsController < ApplicationController
     end
 
     projects = []
-    Project.all.each do |project|
+    total = []
+
+    if project_id == "-1"
+      Project.all.each do |project|
+        p = []
+        p << project.name
+        p << profit_months(project, months)
+        p << COLORS[projects.size]
+        projects << p
+      end
+
+      months.each do |month|
+        requested_date = Date.civil(month[0..3].to_i, month[5..6].to_i, 1)
+
+        from = requested_date - 1
+        to =  requested_date >> 1
+        total << (Project.total_income(from, to) - Person.total_cost(from, to)).to_i
+      end
+
+    else
+      project = Project.find(project_id)
+
       p = []
-      p << project.name
+      p << "Income"
       p << profit_months(project, months)
       p << COLORS[projects.size]
       projects << p
+
+      p = []
+      p << "Cost"
+      p << cost_months(project, months)
+      p << COLORS[projects.size]
+      projects << p
+      
+      total = total_by_project(projects[0][1], projects[1][1])
     end
-
-    total = []
-    months.each do |month|
-      requested_date = Date.civil(month[0..3].to_i, month[5..6].to_i, 1)
-
-      from = requested_date - 1
-      to =  requested_date >> 1
-      total << (Project.total_income(from, to) - Person.total_cost(from, to)).to_i
-    end
-
 
     range = range_of_data(projects, total)
     
@@ -115,47 +134,58 @@ class PersonProjectsController < ApplicationController
 
   end
 
-  def range_of_data(projects, total)
+  def total_by_project(incomes, costs)
+    total = []
+    incomes.size.times do |i|
+      total <<  incomes[i] - costs[i]
+    end
+    total
+  end
 
+
+  def range_of_data(projects, total)
     min = total.min
     max = total.max
 
     projects.each do |p|
-
       max = p[1].max if max < p[1].max
       min = p[1].min if min > p[1].min
-
     end
-
 
     [min, max, ((max - min)/4).to_i]
   end
 
-  def profit_months(project, months)
-
-
+  def cost_months(project, months)
     subtotal = []
-
     months.each do |month|
-
       requested_date = Date.civil(month[0..3].to_i, month[5..6].to_i, 1)
-
       from = requested_date - 1
       to =  requested_date >> 1
-
-      subtotal << project.subtotal_project(from, to).to_i
-
+      subtotal << project.project_cost(from, to).to_i
     end
+    subtotal
+  end
 
-
+  def profit_months(project, months)
+    subtotal = []
+    months.each do |month|
+      requested_date = Date.civil(month[0..3].to_i, month[5..6].to_i, 1)
+      from = requested_date - 1
+      to =  requested_date >> 1
+      subtotal << project.subtotal_project(from, to).to_i
+    end
     subtotal
   end
 
   def graph_code
 
-    title = Title.new("PROJECT - PROFIT (last 3 months)")
+    if params[:project_id] == "-1"
+      title = Title.new("ALL PROJECTS - PROFIT (last #{params[:count]} months)")
+    else
+      title = Title.new( Project.find(params[:project_id]).name + " (last #{params[:count]} months)")
+    end
 
-    projects, months, range, total_month = last_months(4, params[:requested_date])
+    projects, months, range, total_month = last_months(params[:count].to_i, params[:requested_date], params[:project_id])
 
     line_dot = LineDot.new
     line_dot.width = 4
@@ -199,12 +229,13 @@ class PersonProjectsController < ApplicationController
     y_legend = YLegend.new("Profit")
     y_legend.set_style('{font-size: 12px; color: #770077}')
 
-    chart =OpenFlashChart.new
+    chart = OpenFlashChart.new
     chart.set_title(title)
     chart.set_x_legend(x_legend)
     chart.set_y_legend(y_legend)
     chart.x_axis = x # Added this line since the previous tutorial
     chart.y_axis = y
+    
 
     chart.add_element(line_dot)
     
@@ -233,17 +264,65 @@ class PersonProjectsController < ApplicationController
   end
 
   def dashboard
-    @people = Person.all
-    @projects = Project.all
-    @graph = open_flash_chart_object(600,300,"/person_projects/graph_code/#{params[:requested_date]}")
-    @graph2 = open_flash_chart_object(600,300,"/person_projects/graph_code/#{params[:requested_date]}")
 
     @requested_date = Date.civil(params[:requested_date][0..3].to_i, params[:requested_date][5..6].to_i, 1)
+    @from_date = @requested_date - 1
+    @to_date =  @requested_date >> 1
+    @historic_projects = HistoricProject.find(:all, :conditions => ["historic_date > ? and historic_date < ?", @from_date, @to_date])
 
-    @from = @requested_date - 1
-    @to =  @requested_date >> 1
+    @people = Person.all
+    @projects = Project.all
 
-    @historic_projects = HistoricProject.find(:all, :conditions => ["historic_date > ? and historic_date < ?", @from, @to])
+    
+    if params[:from] and params[:to]
+
+      @project = Project.find(params[:project_id])
+
+      @from = Date.civil(params[:from][0..3].to_i, params[:from][5..6].to_i, 1)
+      @to = Date.civil(params[:to][0..3].to_i, params[:to][5..6].to_i, 1)
+      
+      if @from > @to
+        @to = Date.civil(params[:from][0..3].to_i, params[:from][5..6].to_i, 1)
+        @from = Date.civil(params[:to][0..3].to_i, params[:to][5..6].to_i, 1)
+      end
+
+      count = (months_between(@from,@to) == 0) ? 2 : months_between(@from,@to) + 1
+      @graph2 = open_flash_chart_object(600,300,"/person_projects/graph_code/#{@to}/#{count}/#{params[:project_id]}")
+      @graph = open_flash_chart_object(600,300,"/person_projects/graph_code/#{@to}/#{count}/-1")
+    else
+      @project = Project.first
+      @graph = open_flash_chart_object(600,300,"/person_projects/graph_code/#{params[:requested_date]}/2/-1")
+      @graph2 = open_flash_chart_object(600,300,"/person_projects/graph_code/#{params[:requested_date]}/2/#{@project.id}")
+      @from = @requested_date << 1
+      @to = @requested_date 
+    end
+
+  end
+
+  def months_between( date1=Time.now, date2=Time.now )
+
+    date1 ||= Time.now
+    date2 ||= Time.now
+
+    if date1 > date2
+      recent_date = date1.to_date
+
+      past_date = date2.to_date
+    else
+      recent_date = date2.to_date
+
+      past_date = date1.to_date
+    end
+    years_diff = recent_date.year - past_date.year
+
+    months_diff = recent_date.month - past_date.month
+    if months_diff < 0
+
+      months_diff = 12 + months_diff
+      years_diff -= 1
+
+    end
+    years_diff*12 + months_diff
   end
 
 end
