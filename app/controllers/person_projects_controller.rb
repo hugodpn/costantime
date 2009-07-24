@@ -100,11 +100,36 @@ class PersonProjectsController < ApplicationController
       projects << p
     end
 
+    total = []
+    months.each do |month|
+      requested_date = Date.civil(month[0..3].to_i, month[5..6].to_i, 1)
 
-    range = [0,26000,10000]
+      from = requested_date - 1
+      to =  requested_date >> 1
+      total << (Project.total_income(from, to) - Person.total_cost(from, to)).to_i
+    end
+
+
+    range = range_of_data(projects, total)
     
-    return projects, months, range, [25000, 20000, 22000, 22000]
+    return projects, months, range, total
 
+  end
+
+  def range_of_data(projects, total)
+
+    min = total.min
+    max = total.max
+
+    projects.each do |p|
+
+      max = p[1].max if max < p[1].max
+      min = p[1].min if min > p[1].min
+
+    end
+
+
+    [min, max, ((max - min)/4).to_i]
   end
 
   def profit_months(project, months)
@@ -133,13 +158,12 @@ class PersonProjectsController < ApplicationController
 
     information, months, range, total_month = last_months(4, params[:requested_date])
 
-
     line_dot = LineDot.new
     line_dot.width = 4
     line_dot.colour = '#DFC329'
     line_dot.dot_size = 5
     line_dot.values = total_month
-    line_dot.text = "Total Month"
+    line_dot.text = "TOTAL"
 
     @line_project = []
     information.each do |data|
