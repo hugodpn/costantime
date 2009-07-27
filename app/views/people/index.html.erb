@@ -21,8 +21,7 @@
         <td><%=h person.first_name %></td>
         <td><%=h person.last_name %></td>
         <td><%=h person.salary %></td>
-        <td><%=h person.working_hours %></td>
-        <td><%= link_to 'Show', person %></td>
+        <td><%=h person.working_hours %></td>        
         <td><%= link_to 'Edit', edit_person_path(person) %></td>
         <td><%= link_to 'Destroy', person, :confirm => 'Are you sure?', :method => :delete %></td>
       </tr>

@@ -7,30 +7,35 @@
 </div>
 
 <div id="contentPage">
-  <% form_for(@person) do |f| %>
-    <%= f.error_messages %>
+  <table id="rounded-corner">
+    <tr>
+      <td>
+        <% form_for(@person) do |f| %>
+          <%= f.error_messages %>
 
-    <p>
-      <%= f.label :first_name %><br />
-      <%= f.text_field :first_name %>
-    </p>
-    <p>
-      <%= f.label :last_name %><br />
-      <%= f.text_field :last_name %>
-    </p>
-    <p>
-      <%= f.label :salary %><br />
-      <%= f.text_field :salary %>
-    </p>
-    <p>
-      <%= f.label :working_hours %><br />
-      <%= f.text_field :working_hours %>
-    </p>
-    <p>
-      <%= f.submit 'Update' %>
-    </p>
-  <% end %>
+          <p>
+            <%= f.label :first_name %><br />
+            <%= f.text_field :first_name %>
+          </p>
+          <p>
+            <%= f.label :last_name %><br />
+            <%= f.text_field :last_name %>
+          </p>
+          <p>
+            <%= f.label :salary %><br />
+            <%= f.text_field :salary %>
+          </p>
+          <p>
+            <%= f.label :working_hours %><br />
+            <%= f.text_field :working_hours %>
+          </p>
+          <p>
+            <%= f.submit 'Update' %>
+          </p>
+        <% end %>
+      </td>
+    </tr>
+  </table>
 
-  <%= link_to 'Show', @person %> |
   <%= link_to 'Back', people_path %>
 </div>

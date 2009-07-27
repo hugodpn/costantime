@@ -7,18 +7,23 @@
 </div>
 
 <div id="contentPage">
-  <% form_for(@company) do |f| %>
-    <%= f.error_messages %>
+  <table id="rounded-corner">
+    <tr>
+      <td>
+        <% form_for(@company) do |f| %>
+          <%= f.error_messages %>
 
-    <p>
-      <%= f.label :name %><br />
-      <%= f.text_field :name %>
-    </p>
-    <p>
-      <%= f.submit 'Update' %>
-    </p>
-  <% end %>
-
-  <%= link_to 'Show', @company %> |
+          <p>
+            <%= f.label :name %><br />
+            <%= f.text_field :name %>
+          </p>
+          <p>
+            <%= f.submit 'Update' %>
+          </p>
+        <% end %>
+      </td>
+    </tr>
+  </table>
+  
   <%= link_to 'Back', companies_path %>
 </div>

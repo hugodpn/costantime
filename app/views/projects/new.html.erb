@@ -7,15 +7,21 @@
 </div>
 
 <div id="contentPage">
-  <% form_for(@project) do |f| %>
-    <%= f.error_messages %>
+  <table id="rounded-corner">
+    <tr>
+      <td>
+        <% form_for(@project) do |f| %>
+          <%= f.error_messages %>
 
-    <%= render :partial => 'form', :locals => { :f => f } %>
+          <%= render :partial => 'form', :locals => { :f => f } %>
 
-    <p>
-      <%= f.submit 'Create' %>
-    </p>
-  <% end %>
+          <p>
+            <%= f.submit 'Create' %>
+          </p>
+        <% end %>
+      </td>
+    </tr>
+  </table>
 
   <%= link_to 'Back', projects_path %>
 </div>
